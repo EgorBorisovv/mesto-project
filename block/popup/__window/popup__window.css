@@ -1,5 +1,5 @@
-.modal__window {
-  margin: 195px auto;
+.popup__window {
+  margin:0 auto;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -12,7 +12,7 @@
 }
 
 @media screen and (max-width:1279px) {
-  .modal__window {
+  .popup__window {
     max-width: 282px;
     min-height: 322px;
   }

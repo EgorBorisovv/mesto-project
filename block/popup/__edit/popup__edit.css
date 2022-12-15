@@ -1,4 +1,4 @@
-.modal__edit {
+.popup__edit {
   position: relative;
   max-width: 330px;
   margin: 0;
@@ -10,4 +10,13 @@
   color: #000000;
   padding-top: 34px;
   padding-left: 36px;
+}
+@media screen and (max-width:1279px) {
+  .popup__edit{
+    font-size: 18px;
+    line-height: 22px;
+    max-width: 238px;
+    padding-top: 25px;
+    padding-left: 22px;
+  }
 }

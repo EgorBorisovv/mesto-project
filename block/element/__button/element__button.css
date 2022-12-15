@@ -6,6 +6,7 @@
   background-color: transparent;
   margin-top: 5px;
   border: 0;
+  cursor: pointer;
 }
 
 .element__button:hover {

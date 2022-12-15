@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="ru">
 
 <head>
   <meta charset="UTF-8">
@@ -18,10 +18,10 @@
       <img class="profile__avatar" src="./image/avatar.jpg" alt="Аватар">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <button class="info__button" type="button"></button>
+        <button class="profile__button profile__button_edit type="button"></button>
         <p class="profile__description">Исследователь океана</p>
       </div>
-      <button class="profile__button">+</button>
+      <button class="profile__button profile__button_plus"></button>
     </div>
     <div class="elements">
       <div class="element">
@@ -58,15 +58,19 @@
   <footer class="footer">
     <p class="footer__text">© 2020 Mesto Russia</p>
   </footer>
-  <div class="modal popup_opened">
-    <div class="modal__window">
-      <img class="modal__close-icon" src="./image/Close_Icon.svg" alt="Иконка закрытия">
-      <h2 class="modal__edit">Редактировать профиль</h2>
-      <input type="text" class="modal__input" placeholder="Жак-Ив Кусто">
-      <input type="text" class="modal__input" placeholder="Исследователь океана">
-      <button class="modal__save-button">Сохранить</button>
+  <div class="popup popup_opened">
+    <div class="popup__window">
+      <img class="popup__close-icon" src="./image/Close_Icon.svg" alt="Иконка закрытия">
+      <h2 class="popup__edit">Редактировать профиль</h2>
+      <form class="popup__form" name="form">
+        <fieldset class="popup__info-container" name="form">
+      <input type="text" class="popup__input" placeholder="Жак-Ив Кусто" id="form" name="form">
+      <input type="text" class="popup__input" placeholder="Исследователь океана" id="form" name="form">
+      <button class="popup__save-button">Сохранить</button>
+      </fieldset>
+      </form>
     </div>
-    <div class="modal__overlay"></div>
+    <div class="popup__overlay"></div>
   </div>
 </body>
 

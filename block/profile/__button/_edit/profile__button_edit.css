@@ -1,25 +1,21 @@
-.info__button {
-  position: relative;
+.profile__button_edit{
   display: block;
   width: 24px;
   height: 24px;
   border: 1px solid rgba(255, 255, 255, 1);
   margin: 0;
   background-image: url(../../../../image/icon__edit.svg);
-  background-repeat: no-repeat;
-  background-position: center;
   background-size: 10px;
   background-color: rgba(0, 0, 0, .8);
-  cursor: pointer;
   margin-top: 15px;
 }
 
-.info__button:hover {
+.profile__button_edit:hover {
   opacity: .6;
 }
 
 @media screen and (max-width:1279px) {
-  .info__button {
+  .profile__button_edit {
     margin-top: 8px;
     width: 18px;
     height: 18px;
