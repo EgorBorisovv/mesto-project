@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mesto-project</title>
+  <link rel="stylesheet" href="pages/index.css">
+</head>
+
+<body class="page">
+  <header class="header">
+    <img class="header__logo" src="./image/logo.svg" alt="Логотип место">
+  </header>
+  <main class="main">
+    <div class="profile">
+      <img class="profile__avatar" src="./image/avatar.jpg" alt="Аватар">
+      <div class="profile__info">
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <button class="info__button" type="button"></button>
+        <p class="profile__description">Исследователь океана</p>
+      </div>
+      <button class="profile__button">+</button>
+    </div>
+    <div class="elements">
+      <div class="element">
+        <img class="element__photo" src="./image/korochaevsk.jpg" alt="Корочаевск">
+        <p class="element__description">Карачаевск <button class="element__button"></button></p>
+      </div>
+
+      <div class="element">
+        <img class="element__photo" src="./image/Elbrus.jpg" alt="Эльбрус">
+        <p class="element__description">Гора Эльбрус<button class="element__button"></button></p>
+      </div>
+
+      <div class="element">
+        <img class="element__photo" src="./image/Dombay.jpg" alt="Домбай">
+        <p class="element__description">Домбай <button class="element__button"></button></p>
+      </div>
+
+      <div class="element">
+        <img class="element__photo" src="./image/korochaevsk.jpg" alt="Корочаевск">
+        <p class="element__description">Карачаевск <button class="element__button"></button></p>
+      </div>
+
+      <div class="element">
+        <img class="element__photo" src="./image/Elbrus.jpg" alt="Эльбрус">
+        <p class="element__description">Гора Эльбрус <button class="element__button"></button></p>
+      </div>
+
+      <div class="element">
+        <img class="element__photo" src="./image/Dombay.jpg" alt="Домбай">
+        <p class="element__description">Домбай <button class="element__button"></button></p>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <p class="footer__text">© 2020 Mesto Russia</p>
+  </footer>
+  <div class="modal">
+    <div class="modal__window">
+      <img class="modal__close-icon" src="./image/Close_Icon.svg" alt="Иконка закрытия">
+      <h2 class="modal__edit">Редактировать профиль</h2>
+      <input type="text" class="modal__input" placeholder="Жак-Ив Кусто">
+      <input type="text" class="modal__input" placeholder="Исследователь океана">
+      <button class="modal__save-button">Сохранить</button>
+    </div>
+    <div class="modal__overlay"></div>
+  </div>
+</body>
+
+</html>

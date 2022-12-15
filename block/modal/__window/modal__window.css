@@ -1,0 +1,19 @@
+.modal__window {
+  margin: 195px auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  max-width: 430px;
+  min-height: 330px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
+@media screen and (max-width:1279px) {
+  .modal__window {
+    max-width: 282px;
+    min-height: 322px;
+  }
+}
