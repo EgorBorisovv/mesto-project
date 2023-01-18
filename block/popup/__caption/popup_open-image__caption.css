@@ -1,0 +1,12 @@
+.popup_open-image__caption{
+  position: relative;
+  width: 291px;
+  height: 12px;
+  top: 10px;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FFFFFF;
+}

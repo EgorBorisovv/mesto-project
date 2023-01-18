@@ -1,7 +1,8 @@
 .element__photo {
   position: relative;
-  max-width: 282px;
+  width: 282px;
   height: 282px;
-  background-size: cover;
-  background-repeat: no-repeat;
+  object-fit: cover;
+  object-position: center center;
+  cursor: pointer;
 }
