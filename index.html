@@ -29,38 +29,38 @@
   <footer class="footer">
     <p class="footer__text">© 2020 Mesto Russia</p>
   </footer>
-  <div class="popup">
+  <div class="popup" id="profile">
     <div class="popup__window">
-      <button class="popup__close-icon" type="button"></button>
+      <button class="popup__close-icon" type="button" id="close_profile"></button>
       <h2 class="popup__edit">Редактировать профиль</h2>
       <form class="popup__form" name="form">
         <fieldset class="popup__info-container" name="form">
-          <input type="text" class="popup__input" placeholder="Напишите своё имя" name="form" required>
-          <input type="text" class="popup__input" placeholder="Напишите своё хобби" name="form" required>
-          <button class="popup__save-button" type="submit">Сохранить</button>
+          <input type="text" class="popup__input" placeholder="Напишите своё имя" name="profile" required>
+          <input type="text" class="popup__input" placeholder="Напишите своё хобби" name="hobby" required>
+          <button class="popup__save-button" type="submit" id="save-profile">Сохранить</button>
         </fieldset>
       </form>
     </div>
     <div class="popup__overlay"></div>
   </div>
-  <div class="popup popup_cards">
+  <div class="popup popup_cards" id="cards">
     <div class="popup__window">
-      <button class="popup__close-icon" type="button"></button>
+      <button class="popup__close-icon" type="button" id="close_cards"></button>
       <h2 class="popup__edit">Новое место</h2>
-      <form class="popup__form" name="form">
-        <fieldset class="popup__info-container" name="form">
-          <input type="text" class="popup__input" placeholder="Название" name="form" required>
-          <input type="text" class="popup__input" placeholder="Ссылка на картинку" name="form" required>
-          <button class="popup__save-button" type="submit">Создать</button>
+      <form class="popup__form" name="cards">
+        <fieldset class="popup__info-container" name="cards">
+          <input type="text" class="popup__input" placeholder="Название" name="name" required>
+          <input type="text" class="popup__input" placeholder="Ссылка на картинку" name="image" required>
+          <button class="popup__save-button" type="submit" id="save-card">Создать</button>
         </fieldset>
       </form>
     </div>
     <div class="popup__overlay"></div>
   </div>
-  <div class="popup popup_open-image">
+  <div class="popup popup_open-image" id="image">
     <div class="popup__overlay"></div>
     <div class="popup_open-image__window">
-      <button class="popup__close-icon" type="button"></button>
+      <button class="popup__close-icon" type="button" id="close_image"></button>
       <img class="popup_open-image__image" src="" alt="">
       <p class="popup_open-image__caption"></p>
     </div>

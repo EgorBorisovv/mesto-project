@@ -1,5 +1,5 @@
 .element__photo {
-  position: relative;
+  position: absolute;
   width: 282px;
   height: 282px;
   object-fit: cover;
