@@ -1,4 +1,4 @@
-//Создание дефолтных карточек
+//Дэфолтные значения карточек
 const initialCards = [
   {
     name: 'Архыз',
@@ -25,130 +25,110 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
-//Открытие  поп-апа профиль
+//Статичные переменные
 const popupProfileOpenButton = document.querySelector('.profile__button_edit');
 const popupProfile = document.querySelector('#profile');
+const IconProfileClose = document.querySelector('#close_profile');
+const popupCards = document.querySelector('#cards');
+const cardsButtonPlus = document.querySelector('.profile__button_plus');
+const IconCardsClose = document.querySelector('#close_cards');
+const form = document.querySelector('form[name="form"]');
+const text = document.querySelector('input[name="profile"]');
+const hobby = document.querySelector('input[name="hobby"]');
+const profileSave = document.querySelector('#save-profile');
+const profilePopup = document.querySelector('#profile');
+const inputName = document.querySelector('input[name = "name"]');
+const imageInput = document.querySelector('input[name= "image"]');
+const popupImage = document.querySelector('#image');
+const cardsForm = document.querySelector('form[name="cards"]');
+const cardSave = document.querySelector('#save-card');
+const elements = document.querySelector('.elements');
+//Открытие  поп-апа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 };
+//Открытие поп апа профиля
 popupProfileOpenButton.addEventListener('click',function(){
   openPopup(popupProfile);
+  //Значения в инпутах
+  text.value = document.querySelector('.profile__name').textContent ;
+  hobby.value = document.querySelector('.profile__description').textContent ;
 });
 //Закрытие поп-апа профиль
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
 };
-const closeIconProfile = document.querySelector('#close_profile');
-    closeIconProfile.addEventListener('click',function(){
+    IconProfileClose.addEventListener('click',function(){
       closePopup(popupProfile)
     });
 //Открытие  поп-апа карточки
-const popupCards = document.querySelector('#cards');
-const cardsButtonPlus = document.querySelector('.profile__button_plus')
 cardsButtonPlus.addEventListener('click',function(){
   openPopup(popupCards);
 });
 //Закрытие поп-апа карточки
-const closeIconCards = document.querySelector('#close_cards');
-closeIconCards.addEventListener('click',function(){
+IconCardsClose.addEventListener('click',function(){
   closePopup(popupCards)
 });
-
 //Редактирование профиля
-const text = document.querySelector('input[name="profile"]');
-const hobby = document.querySelector('input[name="hobby"]')
-const profileSave = document.querySelector('#save-profile');
-function saveForm(){
-text.addEventListener("submit",function saveText(){
+function submitProfileForm(evt){
+    evt.preventDefault();
     document.querySelector('.profile__name').textContent = text.value;
-    });
-hobby.addEventListener("submit",function saveHobby(){
     document.querySelector('.profile__description').textContent = hobby.value;
-    });
-    closePopup(popupProfile)
-}
-text.addEventListener("submit", function(){
-  saveForm()
-})
-hobby.addEventListener("submit", function(){
-  saveForm()
-})
-
-//Значения в инпутах
-  text.value = document.querySelector('.profile__name').textContent ;
-  hobby.value = document.querySelector('.profile__description').textContent ;
-
-
-
-function createCard(cardsName,imageLink){
-  const Div = document.createElement('div');
-  Div.className = 'element';
-  const Photo = document.createElement('img');
-    Photo.className = 'element__photo';
-    Photo.setAttribute('src', imageLink)
-    Photo.setAttribute('alt', cardsName)
-  const DeliteButton = document.createElement('button')
-    DeliteButton.className = 'element__delite';
-    DeliteButton.setAttribute('type','button')
-  const Discription = document.createElement('div');
-    Discription.className = 'element__description';
-    Discription.textContent = cardsName;
-  const likeButton = document.createElement('button');
-    likeButton.className = 'element__button';
-    Discription.append(likeButton);
-    Div.append(Photo,DeliteButton,Discription)
-    const allElements = document.querySelector('.elements')
-    allElements.prepend(Div);
-
-
-//Удаление карточек
-const element = document.querySelectorAll('.element');
-const deliteCards = document.querySelectorAll('.element__delite')
-for (let i = 0; i < deliteCards.length; i++){
-  deliteCards[i].addEventListener('click',function (){
-    for (let j = 0; j < element.length; j++){
-      element[i].remove();
+    closePopup(profilePopup)
     };
-  });
+form.addEventListener("submit", submitProfileForm)
+//Добавление карточки
+function submitCardsForm(evt){
+  evt.preventDefault();
+  renderCard({inputName,imageInput})
+  document.querySelector('.element__description').textContent = inputName.value;
+  document.querySelector('.element__photo').src = imageInput.value;
+  document.querySelector('.element__photo').alt = inputName.value;
+  evt.target.reset();
+  closePopup(popupCards)
+  };
+cardsForm.addEventListener("submit", submitCardsForm)
+//создание базовых карточек
+const placeInfo = initialCards.map(function (item) {
+  return {
+    name: item.name,
+    link: item.link
+  };
+});
+function render() {
+  placeInfo.forEach(renderCard);
 }
+function renderCard({ name, link }) {
+  const placeTemplate = document.querySelector('#template').content;
+  const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
+  placeElement.querySelector('.element__description').textContent = name;
+  placeElement.querySelector('.element__photo').src = link;
+  placeElement.querySelector('.element__photo').alt = name;
+  elements.prepend(placeElement);
+  //Удаление карточек
+  const cardsDelite = document.querySelector('.element__delite')
+  cardsDelite.addEventListener('click',function (){
+      placeElement.remove();
+    });
+    //Лайки
+const like = document.querySelector('.element__button');
+like.addEventListener('click', (evt) => {
+  evt.target.classList.toggle('element__button_active');
+});
 //Открытие картинок
-const inputName = document.querySelector('input[name = "name"]');
-const popupImage = document.querySelector('#image')
-const images = document.querySelectorAll('.element__photo')
-for (let i = 0; i < images.length; i++){
-    images[i].addEventListener('click',function openImage(){
+const images = placeElement.querySelector('.element__photo');
+    images.addEventListener('click',function openImage(){
       const modalImage = document.querySelector('.popup_open-image__image');
-      images[i].setAttribute('alt',inputName.value)
-      modalImage.src = images[i].src;
+      modalImage.src = images.src;
       const modalText = document.querySelector('.popup_open-image__caption');
-      const cardText = document.querySelector('.element__description')
-      modalText.textContent = images[i].alt;
+      const cardText = placeElement.querySelector('.element__description');
+      modalText.textContent = images.alt;
       openPopup(popupImage)
     });
-};
 //закрытие картинок
-const closeIconImage = document.querySelector('#close_image');
-closeIconImage.addEventListener('click',function(){
+const iconCloseImage = document.querySelector('#close_image');
+iconCloseImage.addEventListener('click',function(){
   closePopup(popupImage)
 });
 }
-//Добавление карточки
-const saveCard = document.querySelector('#save-card')
-saveCard.submit = createNewCards;
-function createNewCards(){
-  createCard( document.querySelector('input[name = "name"]').value,document.querySelector('input[name = "image"]').value);
-};
-function createBasicCard(){
-  for(let i = 0 ; i < initialCards.length ; i++)
-    createCard(initialCards[i].name,initialCards[i].link);
-};
-createBasicCard()
-//Лайки
-const like = document.querySelectorAll('.element__button');
-for (let i = 0; i < like.length; i++){
-  like[i].addEventListener('click', function (evt) {
-    evt.target.classList.toggle('element__button_active');
-});
-};
-console.log(like)
+render();
