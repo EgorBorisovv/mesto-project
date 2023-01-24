@@ -28,12 +28,12 @@ const initialCards = [
 //Статичные переменные
 const popupProfileOpenButton = document.querySelector('.profile__button_edit');
 const popupProfile = document.querySelector('#profile');
-const IconProfileClose = document.querySelector('#close_profile');
+const iconProfileClose = document.querySelector('#close_profile');
 const popupCards = document.querySelector('#cards');
 const cardsButtonPlus = document.querySelector('.profile__button_plus');
-const IconCardsClose = document.querySelector('#close_cards');
-const form = document.querySelector('form[name="form"]');
-const text = document.querySelector('input[name="profile"]');
+const iconCardsClose = document.querySelector('#close_cards');
+const formProfile = document.querySelector('form[name="form"]');
+const formProfileNameInput = document.querySelector('input[name="profile"]');
 const hobby = document.querySelector('input[name="hobby"]');
 const profileSave = document.querySelector('#save-profile');
 const profilePopup = document.querySelector('#profile');
@@ -43,6 +43,8 @@ const popupImage = document.querySelector('#image');
 const cardsForm = document.querySelector('form[name="cards"]');
 const cardSave = document.querySelector('#save-card');
 const elements = document.querySelector('.elements');
+const profileName = document.querySelector('.profile__name');
+const profileDiscription = document.querySelector('.profile__description');
 //Открытие  поп-апа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -51,14 +53,14 @@ function openPopup(popup) {
 popupProfileOpenButton.addEventListener('click',function(){
   openPopup(popupProfile);
   //Значения в инпутах
-  text.value = document.querySelector('.profile__name').textContent ;
-  hobby.value = document.querySelector('.profile__description').textContent ;
+  formProfileNameInput.value = profileName.textContent ;
+  hobby.value = profileDiscription.textContent ;
 });
 //Закрытие поп-апа профиль
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
 };
-    IconProfileClose.addEventListener('click',function(){
+    iconProfileClose.addEventListener('click',function(){
       closePopup(popupProfile)
     });
 //Открытие  поп-апа карточки
@@ -66,21 +68,21 @@ cardsButtonPlus.addEventListener('click',function(){
   openPopup(popupCards);
 });
 //Закрытие поп-апа карточки
-IconCardsClose.addEventListener('click',function(){
+iconCardsClose.addEventListener('click',function(){
   closePopup(popupCards)
 });
 //Редактирование профиля
 function submitProfileForm(evt){
     evt.preventDefault();
-    document.querySelector('.profile__name').textContent = text.value;
-    document.querySelector('.profile__description').textContent = hobby.value;
+    profileName.textContent = formProfileNameInput.value;
+    profileDiscription.textContent = hobby.value;
     closePopup(profilePopup)
     };
-form.addEventListener("submit", submitProfileForm)
+formProfile.addEventListener("submit", submitProfileForm)
 //Добавление карточки
 function submitCardsForm(evt){
   evt.preventDefault();
-  renderCard({inputName,imageInput})
+  createCards({inputName,imageInput})
   document.querySelector('.element__description').textContent = inputName.value;
   document.querySelector('.element__photo').src = imageInput.value;
   document.querySelector('.element__photo').alt = inputName.value;
@@ -96,22 +98,23 @@ const placeInfo = initialCards.map(function (item) {
   };
 });
 function render() {
-  placeInfo.forEach(renderCard);
+  placeInfo.forEach(createCards);
 }
-function renderCard({ name, link }) {
+
+function  createCards({ name, link }) {
   const placeTemplate = document.querySelector('#template').content;
   const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
   placeElement.querySelector('.element__description').textContent = name;
   placeElement.querySelector('.element__photo').src = link;
   placeElement.querySelector('.element__photo').alt = name;
-  elements.prepend(placeElement);
+
   //Удаление карточек
-  const cardsDelite = document.querySelector('.element__delite')
+  const cardsDelite = placeElement.querySelector('.element__delite')
   cardsDelite.addEventListener('click',function (){
       placeElement.remove();
     });
     //Лайки
-const like = document.querySelector('.element__button');
+const like = placeElement.querySelector('.element__button');
 like.addEventListener('click', (evt) => {
   evt.target.classList.toggle('element__button_active');
 });
@@ -125,10 +128,16 @@ const images = placeElement.querySelector('.element__photo');
       modalText.textContent = images.alt;
       openPopup(popupImage)
     });
+
+renderCard(placeElement,elements)
+return placeElement
+}
+function renderCard(card, container) {
+  container.prepend(card);
+}
+render();
 //закрытие картинок
 const iconCloseImage = document.querySelector('#close_image');
 iconCloseImage.addEventListener('click',function(){
   closePopup(popupImage)
-});
-}
-render();
+})
