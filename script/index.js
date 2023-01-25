@@ -82,7 +82,8 @@ formProfile.addEventListener("submit", submitProfileForm)
 //Добавление карточки
 function submitCardsForm(evt){
   evt.preventDefault();
-  createCards({inputName,imageInput})
+  const newCard = createCard({inputName,imageInput});
+  renderCard(newCard, elements);
   document.querySelector('.element__description').textContent = inputName.value;
   document.querySelector('.element__photo').src = imageInput.value;
   document.querySelector('.element__photo').alt = inputName.value;
@@ -97,11 +98,14 @@ const placeInfo = initialCards.map(function (item) {
     link: item.link
   };
 });
-function render() {
-  placeInfo.forEach(createCards);
-}
 
-function  createCards({ name, link }) {
+function render() {
+  placeInfo.forEach(card =>{
+    const basicCard = createCard(card);
+    renderCard(basicCard, elements);
+  });
+}
+function  createCard({ name, link }) {
   const placeTemplate = document.querySelector('#template').content;
   const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
   placeElement.querySelector('.element__description').textContent = name;
@@ -128,11 +132,10 @@ const images = placeElement.querySelector('.element__photo');
       modalText.textContent = images.alt;
       openPopup(popupImage)
     });
-
-renderCard(placeElement,elements)
-return placeElement
+  return placeElement
 }
-function renderCard(card, container) {
+
+function renderCard(card,container) {
   container.prepend(card);
 }
 render();
