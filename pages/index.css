@@ -36,3 +36,7 @@
 @import url(../block/popup/__close-icon/_image/popup__close-icon_image.css);
 @import url(../block/popup/_open-image/__window/popup_open-image__window.css);
 @import url(../block/popup/__caption/popup_open-image__caption.css);
+@import url(../block/popup/__input/_error/popup__input_error.css);
+@import url(../block/popup/__input/__label/popup__input__label.css);
+@import url(../block/popup/__save-button/_error/popup__save-button_error.css);
+@import url(../block/popup/__input/_error/_active/popup__input_error_active.css);

@@ -42,32 +42,36 @@
     <div class="popup__window">
       <button class="popup__close-icon" type="button" id="close_profile"></button>
       <h2 class="popup__edit">Редактировать профиль</h2>
-      <form class="popup__form" name="form">
+      <form class="popup__form" name="form" novalidate>
         <fieldset class="popup__info-container" name="form">
-          <input type="text" class="popup__input" placeholder="Напишите своё имя" name="profile" required>
-          <input type="text" class="popup__input" placeholder="Напишите своё хобби" name="hobby" required>
+            <input  minlength="2" maxlength="40" data-max-length="40" data-error-message="только латинские буквы, кириллические буквы, знаки дефиса и пробелы" pattern="^[а-яА-ЯёЁa-zA-Z\s-]+$" type="text" id="name-input" class="popup__input" placeholder="Напишите своё имя" name="profile" required>
+            <span class="name-input-error popup__input__label"></span>
+            <input  minlength="2" maxlength="200" data-max-length="200" data-error-message="только латинские буквы, кириллические буквы, знаки дефиса и пробелы" pattern="^[а-яА-ЯёЁa-zA-Z\s-]+$" type="text" id="hobby-input" class="popup__input" placeholder="Напишите своё хобби" name="hobby" required>
+            <span class="hobby-input-error popup__input__label"></span>
           <button class="popup__save-button" type="submit" id="save-profile">Сохранить</button>
         </fieldset>
       </form>
     </div>
-    <div class="popup__overlay"></div>
+    <div class="popup__overlay" id="profile__overlay"></div>
   </div>
   <div class="popup popup_cards" id="cards">
     <div class="popup__window">
       <button class="popup__close-icon" type="button" id="close_cards"></button>
       <h2 class="popup__edit">Новое место</h2>
-      <form class="popup__form" name="cards">
+      <form class="popup__form" name="cards" novalidate>
         <fieldset class="popup__info-container" name="cards">
-          <input type="text" class="popup__input" placeholder="Название" name="name" required>
-          <input type="text" class="popup__input" placeholder="Ссылка на картинку" name="image" required>
+            <input minlength="2" maxlength="30" pattern="^[а-яА-ЯёЁa-zA-Z\s-]+$" data-error-message="только латинские буквы, кириллические буквы, знаки дефиса и пробелы" pattern="^[а-яА-ЯёЁa-zA-Z\s-]+$" type="text" id="card-input" class="popup__input" placeholder="Название" name="name" required>
+            <span class="card-input-error popup__input__label"></span>
+            <input pattern="^https?://.*" type="text" id="src-input" data-error-message="в поле должен быть URL" class="popup__input" placeholder="Ссылка на картинку" name="image" required>
+            <span class="src-input-error popup__input__label"></span>
           <button class="popup__save-button" type="submit" id="save-card">Создать</button>
         </fieldset>
       </form>
     </div>
-    <div class="popup__overlay"></div>
+    <div class="popup__overlay" id="cards__overlay"></div>
   </div>
   <div class="popup popup_open-image" id="image">
-    <div class="popup__overlay"></div>
+    <div class="popup__overlay" id="image__overlay"></div>
     <div class="popup_open-image__window">
       <button class="popup__close-icon" type="button" id="close_image"></button>
       <img class="popup_open-image__image" src="" alt="">
