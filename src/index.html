@@ -6,7 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>mesto-project</title>
-  <link rel="stylesheet" href="pages/index.css">
 </head>
 
 <body class="page">
@@ -44,9 +43,9 @@
       <h2 class="popup__edit">Редактировать профиль</h2>
       <form class="popup__form" name="form" novalidate>
         <fieldset class="popup__info-container" name="form">
-            <input  minlength="2" maxlength="40" data-max-length="40" data-error-message="только латинские буквы, кириллические буквы, знаки дефиса и пробелы" pattern="^[а-яА-ЯёЁa-zA-Z\s-]+$" type="text" id="name-input" class="popup__input" placeholder="Напишите своё имя" name="profile" required>
+            <input  minlength="2" maxlength="40" data-max-length="40" data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки дефиса и пробелы" pattern="^[а-яА-ЯёЁa-zA-Z\s-]+$" type="text" id="name-input" class="popup__input" placeholder="Напишите своё имя" name="profile" required>
             <span class="name-input-error popup__input__label"></span>
-            <input  minlength="2" maxlength="200" data-max-length="200" data-error-message="только латинские буквы, кириллические буквы, знаки дефиса и пробелы" pattern="^[а-яА-ЯёЁa-zA-Z\s-]+$" type="text" id="hobby-input" class="popup__input" placeholder="Напишите своё хобби" name="hobby" required>
+            <input  minlength="2" maxlength="200" data-max-length="200" data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки дефиса и пробелы" pattern="^[а-яА-ЯёЁa-zA-Z\s-]+$" type="text" id="hobby-input" class="popup__input" placeholder="Напишите своё хобби" name="hobby" required>
             <span class="hobby-input-error popup__input__label"></span>
           <button class="popup__save-button" type="submit" id="save-profile">Сохранить</button>
         </fieldset>
@@ -60,7 +59,7 @@
       <h2 class="popup__edit">Новое место</h2>
       <form class="popup__form" name="cards" novalidate>
         <fieldset class="popup__info-container" name="cards">
-            <input minlength="2" maxlength="30" pattern="^[а-яА-ЯёЁa-zA-Z\s-]+$" data-error-message="только латинские буквы, кириллические буквы, знаки дефиса и пробелы" pattern="^[а-яА-ЯёЁa-zA-Z\s-]+$" type="text" id="card-input" class="popup__input" placeholder="Название" name="name" required>
+            <input minlength="2" maxlength="30" pattern="^[а-яА-ЯёЁa-zA-Z\s-]+$" data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки дефиса и пробелы" pattern="^[а-яА-ЯёЁa-zA-Z\s-]+$" type="text" id="card-input" class="popup__input" placeholder="Название" name="name" required>
             <span class="card-input-error popup__input__label"></span>
             <input pattern="^https?://.*" type="text" id="src-input" data-error-message="в поле должен быть URL" class="popup__input" placeholder="Ссылка на картинку" name="image" required>
             <span class="src-input-error popup__input__label"></span>
@@ -78,7 +77,6 @@
       <p class="popup_open-image__caption"></p>
     </div>
   </div>
-  <script src="script/index.js"></script>
 </body>
 
 </html>
