@@ -1,6 +1,9 @@
+
 const formElement = document.querySelector('.popup__form');
 const formInput = formElement.querySelector('.popup__input');
 const formError = formElement.querySelector(`.${formInput.id}-error`);
+
+export {formInput,formElement,formError};
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -18,23 +21,8 @@ const hideInputError = (formElement, inputElement) => {
 };
 
 
-const isValid = (formElement, inputElement) => {
-  if (inputElement.validity.patternMismatch) {
-inputElement.setCustomValidity(inputElement.dataset.errorMessage);
-} else {
-  cardsForm.addEventListener("submit", submitCardsForm)
-  formProfile.addEventListener('submit',submitProfileForm)
-inputElement.setCustomValidity("");
-}
 
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    cardsForm.addEventListener("submit", submitCardsForm)
-    formProfile.addEventListener('submit',submitProfileForm)
-    hideInputError(formElement, inputElement);
-  }
-};
+
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
@@ -51,6 +39,7 @@ const setEventListeners = (formElement) => {
     });
   });
 };
+
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
         buttonElement.disabled = true;
@@ -60,7 +49,20 @@ const toggleButtonState = (inputList, buttonElement) => {
     buttonElement.classList.remove('popup__save-button_error');
   }
 };
-formInput.addEventListener('input', isValid);
+const isValid = (formElement, inputElement) => {
+  if (inputElement.validity.patternMismatch) {
+inputElement.setCustomValidity(inputElement.dataset.errorMessage);
+} else {
+
+inputElement.setCustomValidity("");
+}
+
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+};
 const enableValidation = () => {
   const formList = Array.from(document.querySelectorAll('.popup__form'));
   formList.forEach((formElement) => {
@@ -68,3 +70,4 @@ const enableValidation = () => {
   });
 };
 enableValidation();
+export  {showInputError,hideInputError,hasInvalidInput,setEventListeners,toggleButtonState,enableValidation,isValid}

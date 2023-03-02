@@ -4,7 +4,7 @@
   border-bottom: 1px solid rgba(84, 84, 84, .7);
   margin: 0 200px;
   display: flex;
-  justify-content: start;
+  flex:start;
   margin-top: 45px;
 }
 
