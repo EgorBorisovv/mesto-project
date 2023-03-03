@@ -2,6 +2,11 @@ import {
   popupImage,
   elements,
 } from '../index.js';
+import { renderCard } from './modal.js';
+const placeTemplate = document.querySelector('#template').content;
+const modalImage = document.querySelector('.popup_open-image__image');
+const modalText = document.querySelector('.popup_open-image__caption');
+
 
 import { closePopup,openPopup} from './modal.js'; 
 const initialCards = [
@@ -39,11 +44,10 @@ const placeInfo = initialCards.map(function (item) {
   };
 });
 function  createCard({ name, link }) {
-  const placeTemplate = document.querySelector('#template').content;
   const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
-  placeElement.querySelector('.element__description').textContent = name;
-  placeElement.querySelector('.element__photo').src = link;
-  placeElement.querySelector('.element__photo').alt = name;
+  placeElement.querySelector('.element__description').textContent = name; 
+  placeElement.querySelector('.element__photo').src = link; 
+  placeElement.querySelector('.element__photo').alt = name; 
 
   //Удаление карточек
   const cardsDelite = placeElement.querySelector('.element__delite')
@@ -58,9 +62,9 @@ like.addEventListener('click', (evt) => {
 //Открытие картинок
 const images = placeElement.querySelector('.element__photo');
     images.addEventListener('click',function openImage(){
-      const modalImage = document.querySelector('.popup_open-image__image');
+      
       modalImage.src = images.src;
-      const modalText = document.querySelector('.popup_open-image__caption');
+      modalImage.alt = images.alt;
       const cardText = placeElement.querySelector('.element__description');
       modalText.textContent = images.alt;
       openPopup(popupImage)
@@ -68,9 +72,7 @@ const images = placeElement.querySelector('.element__photo');
   return placeElement
 }
 
-function renderCard(card,container) {
-  container.prepend(card);
-}
+
 
 function render() {
   placeInfo.forEach(card =>{
@@ -85,4 +87,4 @@ iconCloseImage.addEventListener('click',function(){
   closePopup(popupImage)
 })
 
-export {render,createCard,renderCard}
+export {render,createCard}

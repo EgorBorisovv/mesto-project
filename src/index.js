@@ -22,6 +22,8 @@ const cardsOverlay = document.querySelector('#cards__overlay');
 const imageOverlay = document.querySelector('#image__overlay');
 
 
+const inputListCard = Array.from(cardsForm.querySelectorAll('.popup__input'));
+
 export {popupProfileOpenButton,
   popupProfile,
   iconProfileClose,
@@ -44,10 +46,10 @@ export {popupProfileOpenButton,
   profileOverlay,
   cardsOverlay,
   imageOverlay};
-  import {formInput} from './components/validate.js';
+
   import {render} from './components/card.js'
   import {openPopup,closePopup,submitProfileForm,submitCardsForm} from './components/modal.js'
-  import {isValid,enableValidation} from './components/validate.js'
+  import {enableValidation,toggleButtonState} from './components/validate.js'
 
 const buttonActive = new URL('./image/black_like.svg',import.meta.url);
 const button = new URL('./image/like.svg',import.meta.url);
@@ -78,6 +80,7 @@ popupProfileOpenButton.addEventListener('click',function(){
 //Открытие поп апа карточки
 cardsButtonPlus.addEventListener('click',function(){
   openPopup(popupCards);
+  toggleButtonState(inputListCard,cardSave);
 });
 
 iconProfileClose.addEventListener('click',function(){
@@ -97,9 +100,9 @@ profileOverlay.addEventListener('click',function(){
 imageOverlay.addEventListener('click',function(){
   closePopup(popupImage)
 });
-//Закрытие кликом на esc
-window.onkeydown = function( event ) {
-  if ( event.keyCode == 27 ) {
+// Закрытие кликом на esc
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
     if(popupProfile.classList.contains('popup_opened')){
       closePopup(popupProfile)
     }
@@ -110,9 +113,9 @@ window.onkeydown = function( event ) {
       closePopup(popupImage)
     }
   }
-};
+    }
 
-formInput.addEventListener('input', isValid);
+document.addEventListener('keydown', closeByEscape);
 
 
 render();
@@ -124,3 +127,4 @@ formProfile.addEventListener('submit',submitProfileForm)
 iconCardsClose.addEventListener('click',function(){
   closePopup(popupCards)
 })
+

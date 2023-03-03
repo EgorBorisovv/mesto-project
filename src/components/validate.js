@@ -1,9 +1,9 @@
-
 const formElement = document.querySelector('.popup__form');
 const formInput = formElement.querySelector('.popup__input');
 const formError = formElement.querySelector(`.${formInput.id}-error`);
-
+const buttonElement = formElement.querySelector('.popup__save-button');
 export {formInput,formElement,formError};
+export{buttonElement}
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -20,9 +20,6 @@ const hideInputError = (formElement, inputElement) => {
   errorElement.textContent = '';
 };
 
-
-
-
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
@@ -30,7 +27,6 @@ const hasInvalidInput = (inputList) => {
 };
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonElement = formElement.querySelector('.popup__save-button');
   toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
@@ -49,6 +45,7 @@ const toggleButtonState = (inputList, buttonElement) => {
     buttonElement.classList.remove('popup__save-button_error');
   }
 };
+
 const isValid = (formElement, inputElement) => {
   if (inputElement.validity.patternMismatch) {
 inputElement.setCustomValidity(inputElement.dataset.errorMessage);

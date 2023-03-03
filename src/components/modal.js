@@ -10,14 +10,18 @@ import {
   profileDiscription,
 } from '../index.js';
 
-import {createCard,renderCard} from './card.js'
+import {createCard} from './card.js'
 //Открытие  поп-апа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 };
 
 //Закрытие поп-апа профиль
+function renderCard(card,container) {
+  container.prepend(card);
+}
 
+export{renderCard}
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
 };
