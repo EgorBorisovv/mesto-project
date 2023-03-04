@@ -24,6 +24,8 @@ const imageOverlay = document.querySelector('#image__overlay');
 
 const inputListCard = Array.from(cardsForm.querySelectorAll('.popup__input'));
 
+
+
 export {popupProfileOpenButton,
   popupProfile,
   iconProfileClose,
@@ -80,8 +82,12 @@ popupProfileOpenButton.addEventListener('click',function(){
 //Открытие поп апа карточки
 cardsButtonPlus.addEventListener('click',function(){
   openPopup(popupCards);
-  toggleButtonState(inputListCard,cardSave);
+  toggleButtonState(inputListCard,cardSave)
 });
+//Валидация карточки
+cardsForm.addEventListener('input',function(){
+  toggleButtonState(inputListCard,cardSave)
+})
 
 iconProfileClose.addEventListener('click',function(){
   closePopup(popupProfile)
@@ -100,26 +106,15 @@ profileOverlay.addEventListener('click',function(){
 imageOverlay.addEventListener('click',function(){
   closePopup(popupImage)
 });
-// Закрытие кликом на esc
+
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
-    if(popupProfile.classList.contains('popup_opened')){
-      closePopup(popupProfile)
-    }
-    if(popupCards.classList.contains('popup_opened')){
-      closePopup(popupCards)
-    }
-    if(popupImage.classList.contains('popup_opened')){
-      closePopup(popupImage)
-    }
+    const openedPopup = document.querySelector('.popup_opened') 
+    closePopup(openedPopup)
   }
-    }
-
-document.addEventListener('keydown', closeByEscape);
-
+}
 
 render();
-
 
 cardsForm.addEventListener('submit', submitCardsForm)
 formProfile.addEventListener('submit',submitProfileForm)
@@ -127,4 +122,4 @@ formProfile.addEventListener('submit',submitProfileForm)
 iconCardsClose.addEventListener('click',function(){
   closePopup(popupCards)
 })
-
+export {closeByEscape}

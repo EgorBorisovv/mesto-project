@@ -2,12 +2,13 @@ const formElement = document.querySelector('.popup__form');
 const formInput = formElement.querySelector('.popup__input');
 const formError = formElement.querySelector(`.${formInput.id}-error`);
 const buttonElement = formElement.querySelector('.popup__save-button');
+const errorInput = formElement.querySelector('popup__input_error');
 export {formInput,formElement,formError};
 export{buttonElement}
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_error');
+  inputElement.classList.add(errorInput);
   errorElement.textContent = errorMessage;
   errorElement.classList.add('popup__input_error_active');
 };
@@ -15,7 +16,7 @@ const showInputError = (formElement, inputElement, errorMessage) => {
 
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_error');
+  inputElement.classList.remove(errorInput);
   errorElement.classList.remove('popup__input_error_active');
   errorElement.textContent = '';
 };
@@ -60,11 +61,11 @@ inputElement.setCustomValidity("");
     hideInputError(formElement, inputElement);
   }
 };
-const enableValidation = () => {
+const enableValidation = (formSelector,inputSelector,submitButtonSelector,inactiveButtonClass,inputErrorClass,errorClass) => {
   const formList = Array.from(document.querySelectorAll('.popup__form'));
   formList.forEach((formElement) => {
     setEventListeners(formElement);
   });
 };
-enableValidation();
+
 export  {showInputError,hideInputError,hasInvalidInput,setEventListeners,toggleButtonState,enableValidation,isValid}
