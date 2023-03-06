@@ -70,7 +70,9 @@ enableValidation({
   submitButtonSelector: '.popup__save-button',
   inactiveButtonClass: 'popup__save-button_error',
   inputErrorClass: 'popup__input_error',
-  errorClass: 'popup__input__label'
+  errorClass: 'popup__input__label',
+  inputError: 'popup__input_error_active',
+  buttonError: 'popup__save-button_error'
 }); 
 
 //Открытие поп апа профиля

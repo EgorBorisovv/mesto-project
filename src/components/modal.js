@@ -8,7 +8,6 @@ import {
   elements,
   profileName,
   profileDiscription,
-  cardsForm,
 } from '../index.js';
 import{closeByEscape} from '../index.js'
 import {createCard} from './card.js'
@@ -20,16 +19,9 @@ function openPopup(popup) {
 
 //Закрытие поп-апа профиль
 function renderCard(card,container) {
-  if(inputName.value != 0){
-  card.querySelector('.element__description').textContent = inputName.value;
-  card.querySelector('.element__photo').src = imageInput.value;
-  card.querySelector('.element__photo').alt = imageInput.value; 
-  container.prepend(card);
-  }
-  else{
     container.prepend(card);
   }
-}
+
 
 export{renderCard}
 function closePopup(popup) {
@@ -38,7 +30,9 @@ function closePopup(popup) {
 };
 function submitCardsForm(evt){
   evt.preventDefault();
-  const newCard = createCard({inputName,imageInput});
+  const cardName = inputName.value ;
+  const cardLink = imageInput.value ;
+  const newCard = createCard({name:cardName,link:cardLink});  
   renderCard(newCard, elements);
   evt.target.reset();
   closePopup(popupCards)
