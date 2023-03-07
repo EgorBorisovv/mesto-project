@@ -63,17 +63,8 @@ import './styles/index.css';
 import './components/card.js';
 import './components/modal.js';
 import './components/validate.js';
-
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_error',
-  inputErrorClass: 'popup__input_error',
-  errorClass: 'popup__input__label',
-  inputError: 'popup__input_error_active',
-  buttonError: 'popup__save-button_error'
-}); 
+import {settings} from './components/validate.js'
+enableValidation({settings}); 
 
 //Открытие поп апа профиля
 popupProfileOpenButton.addEventListener('click',function(){
@@ -84,11 +75,11 @@ popupProfileOpenButton.addEventListener('click',function(){
 //Открытие поп апа карточки
 cardsButtonPlus.addEventListener('click',function(){
   openPopup(popupCards);
-  toggleButtonState(inputListCard,cardSave)
+  toggleButtonState(inputListCard,cardSave,settings)
 });
 //Валидация карточки
 cardsForm.addEventListener('input',function(){
-  toggleButtonState(inputListCard,cardSave)
+  toggleButtonState(inputListCard,cardSave,settings)
 })
 
 iconProfileClose.addEventListener('click',function(){
