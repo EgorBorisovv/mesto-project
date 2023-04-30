@@ -1,11 +1,15 @@
 .profile__avatar {
   position: relative;
-  max-width: 168.75px;
+  max-width: 168.2px;
   border-radius: 50%;
-  height: 127.5px;
+  height: 168.2px;
   align-self: center;
+  object-fit: cover;
+  cursor: pointer;
 }
-
+.profile__avatar:hover {
+  opacity: 0.2;
+}
 @media screen and (max-width:1279px) {
   .profile__avatar {
     margin: 0 auto;

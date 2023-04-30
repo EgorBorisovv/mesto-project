@@ -40,3 +40,12 @@
 @import url(../block/popup/__input/__label/popup__input__label.css);
 @import url(../block/popup/__save-button/_error/popup__save-button_error.css);
 @import url(../block/popup/__input/_error/_active/popup__input_error_active.css);
+@import url(../block/element/__like/element__like.css);
+@import url(../block/element/__count/element__count.css);
+@import url(../block/popup/_delite/popup_delite.css);
+@import url(../block/popup/__window/_delite/popup__window_delite.css);
+@import url(../block/popup/__save-button/_delite/popup__save-button_delite.css);
+@import url(../block/profile/__patch-avatar/profile__patch-avatar.css);
+@import url(../block/profile/__avatar-container/profile__avatar-container.css);
+@import url(../block/popup/_avatar/popup_avatar.css);
+@import url(../block/popup/__window/_avatar/popup__window_avatar.css);

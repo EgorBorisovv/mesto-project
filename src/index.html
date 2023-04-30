@@ -14,7 +14,10 @@
   </header>
   <main class="main">
     <div class="profile">
+      <div class="profile__avatar-container">
+      <img class="profile__patch-avatar" src="<%=require('./image/Vector.png')%>" alt="Исправить">
       <img class="profile__avatar" src="<%=require('./image/avatar.jpg')%>" alt="Аватар">
+    </div>
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <button class="profile__button profile__button_edit" type="button"></button>
@@ -26,10 +29,14 @@
       <template id="template">
       <div class="element">
         <img class="element__photo">
-        <button class="element__delite"></button>
+
         <p class="element__description">
         </p>
-        <button class="element__button"></button>
+        <div class="element__like">
+          <button class="element__button"></button>
+          <p class="element__count"></p>
+        </div>
+        
       </div>
     </template>
     </div>
@@ -67,6 +74,7 @@
         </fieldset>
       </form>
     </div>
+
     <div class="popup__overlay" id="cards__overlay"></div>
   </div>
   <div class="popup popup_open-image" id="image">
@@ -76,6 +84,32 @@
       <img class="popup_open-image__image" src="" alt="">
       <p class="popup_open-image__caption"></p>
     </div>
+  </div>
+  <div class="popup popup_delite" id="delite">
+    <div class="popup__window_delite">
+      <button class="popup__close-icon" type="button" id="close_delite"></button>
+      <h2 class="popup__edit">Вы уверены?</h2>
+      <form class="popup__form" name="delite" novalidate>
+        <fieldset class="popup__info-container" name="form">
+          <button class="popup__save-button popup__save-button_delite" type="submit" id="save-delite">Да</button>
+        </fieldset>
+      </form>
+    </div>
+    <div class="popup__overlay" id="delite__overlay"></div>
+  </div>
+  <div class="popup popup_avatar" id="avatar">
+    <div class="popup__window_avatar">
+      <button class="popup__close-icon" type="button" id="close_delite"></button>
+      <h2 class="popup__edit">Обновить аватар</h2>
+      <form class="popup__form" name="avatar-form" novalidate>
+        <fieldset class="popup__info-container" name="form">
+          <input pattern="^https?://.*" type="text" id="avatar-input" data-error-message="в поле должен быть URL" class="popup__input" placeholder="Ссылка на картинку" name="avatar" required>
+          <span class="src-input-error popup__input__label"></span>
+          <button class="popup__save-button popup__save-button_avatar" type="submit" id="save-delite">Сохранить</button>
+        </fieldset>
+      </form>
+    </div>
+    <div class="popup__overlay" id="delite__overlay"></div>
   </div>
 </body>
 
