@@ -3,7 +3,7 @@ import {
   elements,
 } from '../index.js';
 import { renderCard } from './modal.js';
-import { getCard } from './api.js';
+import { deliteApi, getCard, putLike } from './api.js';
 const placeTemplate = document.querySelector('#template').content;
 const modalImage = document.querySelector('.popup_open-image__image');
 const modalText = document.querySelector('.popup_open-image__caption');
@@ -21,17 +21,8 @@ function  createCard({ name, link,likes,id ,owner}) {
     //Лайки
     const like = placeElement.querySelector('.element__button');
     like.addEventListener('click', (evt) => {
-      evt.target.classList.toggle('element__button_active');  
-      fetch(`https://nomoreparties.co/v1/plus-cohort-23/cards/likes/${id}`, {
-    method: 'PUT',
-    headers: {
-    authorization: 'c56e30dc-2883-4270-a59e-b2f7bae969c6',
-    'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      likes:Number(likes) + 1
-  })
-}); 
+      evt.target.classList.toggle('element__button_active');
+        putLike(id)       
       }); 
 
 if(owner === 'e73ca1412a678dbe12a1e470'){
@@ -43,12 +34,7 @@ if(owner === 'e73ca1412a678dbe12a1e470'){
           openPopup(popupDelite)
           deliteForm.addEventListener('submit',function(evt){
             evt.preventDefault();
-            fetch(`https://nomoreparties.co/v1/plus-cohort-23/cards/${id}`, {
-            method: 'DELITE',   
-            headers: {
-              authorization:'005699ab-4782-4879-a334-2468c75341c4',
-            }
-            });
+            deliteApi(id)
             placeElement.remove();
             closePopup(popupDelite);
           })
