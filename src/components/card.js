@@ -2,7 +2,8 @@ import {
   popupImage,
   elements,
 } from '../index.js';
-
+import { renderCard } from './modal.js';
+import { getCard } from './api.js';
 const placeTemplate = document.querySelector('#template').content;
 const modalImage = document.querySelector('.popup_open-image__image');
 const modalText = document.querySelector('.popup_open-image__caption');
@@ -17,11 +18,6 @@ function  createCard({ name, link,likes,id ,owner}) {
   placeElement.querySelector('.element__photo').src = link; 
   placeElement.querySelector('.element__photo').alt = name; 
   counterLikes.textContent = likes.length;
-
-
-  
-
-  
     //Лайки
     const like = placeElement.querySelector('.element__button');
     like.addEventListener('click', (evt) => {
@@ -73,6 +69,31 @@ const images = placeElement.querySelector('.element__photo');
   
   }
 
-
-    
-export {counterLikes,createCard}
+  async function loadApiCard(){
+    let content = await getCard()
+    const placeInfo = content.map(function (item) {
+      return {
+          name: item.name,
+          link: item.link,
+          likes: item.likes,
+          id:item._id,
+          owner:item.owner._id
+      };
+      });
+      
+      //закрытие картинок
+      const iconCloseImage = document.querySelector('#close_image');
+      iconCloseImage.addEventListener('click',function(){
+      closePopup(popupImage)
+      })
+      
+      function render() {
+      placeInfo.forEach(card =>{
+          const basicCard = createCard(card);
+          renderCard(basicCard, elements);
+      });
+      }
+      render()
+  }
+  loadApiCard()
+  export {counterLikes,createCard}

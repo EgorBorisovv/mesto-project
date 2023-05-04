@@ -52,7 +52,7 @@ export {popupProfileOpenButton,
   avatarPopupButton,
   avatarInput,avatar};
 
-  import {getCard,getProfile} from './components/api.js'
+  import {getApiProfile} from './components/api.js'
   import {openPopup,closePopup,submitProfileForm,submitCardsForm,submitAvatarForm} from './components/modal.js'
   import {enableValidation,toggleButtonState} from './components/validate.js'
 
@@ -122,11 +122,5 @@ iconCardsClose.addEventListener('click',function(){
 })
 export {closeByEscape}
 //Данные профиля api
-
-
-
-getProfile()
-getCard()
-
-
+  getApiProfile(profileName,avatar,profileDiscription)
 

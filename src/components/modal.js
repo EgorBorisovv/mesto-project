@@ -14,6 +14,8 @@ import {
 } from '../index.js';
 import{closeByEscape} from '../index.js'
 import {createCard} from './card.js'
+
+
 //Открытие  поп-апа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
