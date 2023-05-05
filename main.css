@@ -48,5 +48,7 @@
 .profile__patch-avatar{display:block;height:26px;left:75px;position:absolute;top:65px;width:26px}
 .profile__avatar-container{align-self:center;height:168.2px;max-width:168.2px;position:relative}
 
-.popup__window_avatar{background:#fff;border-radius:10px;box-shadow:0 0 25px rgba(0,0,0,.15);display:flex;flex-direction:column;margin:0 auto;max-height:272px;position:relative;width:430px;z-index:2}@media screen and (max-width:1279px){.popup__window_avatar{max-width:282px;min-height:322px}}
+.popup__window_avatar{background:#fff;border-radius:10px;box-shadow:0 0 25px rgba(0,0,0,.15);display:flex;flex-direction:column;height:272px;margin:0 auto;position:relative;width:430px;z-index:2}@media screen and (max-width:1279px){.popup__window_avatar{max-width:282px;min-height:322px}}
+
+.popup__input_avatar{background-color:transparent;border:0;border-bottom:1px solid rgba(0,0,0,.2);color:#000;font-family:Inter,Arial,sans-serif;font-size:14px;font-style:normal;font-weight:400;height:27px;line-height:17px;margin:54px 0 0;position:relative;width:100%}.popup__input_avatar:focus{border:0;border-bottom:1px solid rgba(0,0,0,.2);outline:none}.popup__input_avatar::-moz-placeholder{color:#000}.popup__input_avatar::placeholder{color:#000}
 
