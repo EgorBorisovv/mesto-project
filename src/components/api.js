@@ -32,34 +32,46 @@ async function getCard(){
 function deliteApi(id){
     fetch(`${config.baseUrl}/cards/${id}`, {
         mode: 'cors',
-        method: 'DELITE',   
+        method: 'DELETE',   
         headers: {
         authorization:`${config.headers.authorization}`,
         'Access-Control-Allow-Origin':'*',
         'Content-Type': 'application/json',
-        
         },
     });
 }
 
 //лайки
-//постановка лайка
-function putLike(id){
+//снятие лайка
+function deleteLike(id,count){
     fetch(`${config.baseUrl}/cards/likes/${id}`, {
-        method: 'PUT',
+        mode: 'cors',
+        method: 'DELETE',
         headers: {
         authorization: `${config.headers.authorization}`,
+        'Access-Control-Allow-Origin':'*',
         'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            likes:+1
+            likes:Number(count)-1
+    })   
         })
-    }); 
+    }; 
+//постановка лайка
+function putLike(id,count){
+    fetch(`${config.baseUrl}/cards/likes/${id}`, { 
+        method: 'PUT',     
+        headers: {    
+        authorization: `${config.headers.authorization}`,     
+        'Content-Type': 'application/json'    
+        },
+        body: JSON.stringify({
+            likes:Number(count)+1
+    })   
+});  
 }
-//снятие лайка
-
-//Создание карточки
-function createApiCard(){
+//создание карточки
+function createApiCard(cardName,cardLink){
         fetch('https://nomoreparties.co/v1/plus-cohort-23/cards', {
     method: 'POST',
     headers: {
@@ -99,4 +111,4 @@ fetch(`${config.baseUrl}/users/me`, {
     })
 }); 
 }
-export {getApiProfile,getCard,deliteApi,putLike,createApiCard,patchAvatar,patchProfile}
+export {getApiProfile,getCard,deliteApi,putLike,createApiCard,patchAvatar,patchProfile,deleteLike}

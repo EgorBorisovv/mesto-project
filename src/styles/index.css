@@ -49,3 +49,5 @@
 @import url(../block/profile/__avatar-container/profile__avatar-container.css);
 @import url(../block/popup/_avatar/popup_avatar.css);
 @import url(../block/popup/__window/_avatar/popup__window_avatar.css);
+@import url(../block/popup/__save-button/_avatar/popup__save-button_avatar.css);
+@import url(../block/popup/__input/_avatar/popup__input_avatar.css);

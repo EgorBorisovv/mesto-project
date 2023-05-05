@@ -5,6 +5,7 @@ const iconProfileClose = document.querySelector('#close_profile');
 const popupCards = document.querySelector('#cards');
 const cardsButtonPlus = document.querySelector('.profile__button_plus');
 const iconCardsClose = document.querySelector('#close_cards');
+const iconAvatarClose = document.querySelector('#close_avatar');
 const formProfile = document.querySelector('form[name="form"]');
 const formProfileNameInput = document.querySelector('input[name="profile"]');
 const hobby = document.querySelector('input[name="hobby"]');
@@ -21,11 +22,12 @@ const profileName = document.querySelector('.profile__name');
 const profileDiscription = document.querySelector('.profile__description');
 const profileOverlay = document.querySelector('#profile__overlay');
 const cardsOverlay = document.querySelector('#cards__overlay');
+const avatarOverlay = document.querySelector('#avatar__overlay');
 const imageOverlay = document.querySelector('#image__overlay');
 const popupAvatar = document.querySelector('.popup_avatar')
 const inputListCard = Array.from(cardsForm.querySelectorAll('.popup__input'));
 const avatarSave = document.querySelector('form[name="avatar-form"]')
-const avatarInput = document.querySelector('#avatar-input');
+const avatarInput = document.querySelector('.popup__input_avatar');
 
 export {popupProfileOpenButton,
   popupProfile,
@@ -50,11 +52,11 @@ export {popupProfileOpenButton,
   cardsOverlay,
   imageOverlay,
   avatarPopupButton,
-  avatarInput,avatar};
+  avatarInput,avatar,popupAvatar};
 
   import {getApiProfile} from './components/api.js'
   import {openPopup,closePopup,submitProfileForm,submitCardsForm,submitAvatarForm} from './components/modal.js'
-  import {enableValidation,toggleButtonState} from './components/validate.js'
+  import {enableValidation,setEventListeners,toggleButtonState} from './components/validate.js'
 
 const buttonActive = new URL('./image/black_like.svg',import.meta.url);
 const button = new URL('./image/like.svg',import.meta.url);
@@ -65,9 +67,45 @@ import './styles/index.css';
 import './components/card.js';
 import './components/modal.js';
 import './components/validate.js';
-import {settings} from './components/validate.js'
-enableValidation({settings}); 
 
+//валидация профиля
+const settingsProfile = {
+  formSelector:'.popup__form', 
+  inputSelector:'.popup__input_profile', 
+  errorClass: document.querySelector('popup__input__label'), 
+  inputErrorActive:'popup__input_error_active', 
+  buttonError: 'popup__save-button_error',
+  errorInput:'popup__input_error',
+  inputElement:document.querySelector('.popup__input'),
+  buttonElement:document.querySelector('.popup__save-button')
+}
+enableValidation(settingsProfile)
+//Валидация карточек
+const settingsCard = {
+  formSelector:'.popup__form_cards', 
+  inputSelector:'.popup__input_cards', 
+  errorClass: document.querySelector('popup__input__label_cards'), 
+  inputErrorActive:'popup__input_error_active', 
+  buttonError: 'popup__save-button_error',
+  errorInput:'popup__input_error',
+  inputElement:document.querySelector('.popup__input_cards'),
+  buttonElement:document.querySelector('.popup__save-button_cards')
+}
+enableValidation(settingsCard)
+
+//Валидация аватара
+const settingsAvatar = {
+  formSelector:'.popup__form_avatar', 
+  inputSelector:'.popup__input_avatar', 
+  errorClass: document.querySelector('popup__input__label_avatar'), 
+  inputErrorActive:'popup__input_error_active', 
+  buttonError: 'popup__save-button_error',
+  errorInput:'popup__input_error',
+  inputElement:document.querySelector('.popup__input_avatar'),
+  buttonElement:document.querySelector('.popup__save-button_avatar')
+}
+enableValidation(settingsAvatar)
+//открытие поп-апа аватара
 avatarPopupButton.addEventListener('click',function(){
   openPopup(popupAvatar);
 })
@@ -80,12 +118,7 @@ popupProfileOpenButton.addEventListener('click',function(){
 //Открытие поп апа карточки
 cardsButtonPlus.addEventListener('click',function(){
   openPopup(popupCards);
-  toggleButtonState(inputListCard,cardSave,settings)
 });
-//Валидация карточки
-cardsForm.addEventListener('input',function(){
-  toggleButtonState(inputListCard,cardSave,settings)
-})
 
 iconProfileClose.addEventListener('click',function(){
   closePopup(popupProfile)
@@ -104,6 +137,10 @@ profileOverlay.addEventListener('click',function(){
 imageOverlay.addEventListener('click',function(){
   closePopup(popupImage)
 });
+//Закрытие кликом на оверлэй аватар
+avatarOverlay.addEventListener('click',function(){
+  closePopup(popupAvatar)
+});
 
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
@@ -117,8 +154,13 @@ function closeByEscape(evt) {
 cardsForm.addEventListener('submit', submitCardsForm)
 formProfile.addEventListener('submit',submitProfileForm)
 avatarSave.addEventListener('submit',submitAvatarForm)
+
+
 iconCardsClose.addEventListener('click',function(){
   closePopup(popupCards)
+})
+iconAvatarClose.addEventListener('click',function(){
+  closePopup(popupAvatar)
 })
 export {closeByEscape}
 //Данные профиля api

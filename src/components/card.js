@@ -3,7 +3,7 @@ import {
   elements,
 } from '../index.js';
 import { renderCard } from './modal.js';
-import { deliteApi, getCard, putLike } from './api.js';
+import { deleteLike, deliteApi, getCard, putLike } from './api.js';
 const placeTemplate = document.querySelector('#template').content;
 const modalImage = document.querySelector('.popup_open-image__image');
 const modalText = document.querySelector('.popup_open-image__caption');
@@ -12,6 +12,7 @@ let counterLikes = placeTemplate.querySelector('.element__count')
 import { closePopup,openPopup} from './modal.js'; 
 const elemenDelite = document.querySelector('.popup__save-button_delite')
 const deliteForm = document.querySelector('form[name="delite"]');
+
 function  createCard({ name, link,likes,id ,owner}) {
   const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
   placeElement.querySelector('.element__description').textContent = name; 
@@ -20,9 +21,14 @@ function  createCard({ name, link,likes,id ,owner}) {
   counterLikes.textContent = likes.length;
     //Лайки
     const like = placeElement.querySelector('.element__button');
-    like.addEventListener('click', (evt) => {
+    like.addEventListener('click', (evt) => {  
       evt.target.classList.toggle('element__button_active');
-        putLike(id)       
+
+        if(like.classList.contains('element__button_active')){
+          putLike(id)
+        }else{
+          deleteLike(id)
+        }
       }); 
 
 if(owner === 'e73ca1412a678dbe12a1e470'){
@@ -66,7 +72,7 @@ const images = placeElement.querySelector('.element__photo');
           owner:item.owner._id
       };
       });
-      
+
       //закрытие картинок
       const iconCloseImage = document.querySelector('#close_image');
       iconCloseImage.addEventListener('click',function(){
@@ -81,5 +87,7 @@ const images = placeElement.querySelector('.element__photo');
       }
       render()
   }
+
+
   loadApiCard()
   export {counterLikes,createCard}

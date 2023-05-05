@@ -10,7 +10,7 @@ import {
   profileName,
   profileDiscription,
   avatarPopupButton,
-  avatarInput
+  avatarInput,popupAvatar
 } from '../index.js';
 import{closeByEscape} from '../index.js'
 import { createApiCard, patchAvatar, patchProfile } from './api.js';
@@ -39,12 +39,10 @@ function submitCardsForm(evt){
   const cardName = inputName.value ;
   const cardLink = imageInput.value ;
   const newCard = createCard({name:cardName,link:cardLink,likes:'0'});  
-  
   renderCard(newCard, elements);
   evt.target.reset();
-
-  createApiCard()
-closePopup(popupCards)
+  createApiCard(cardName,cardLink)
+  closePopup(popupCards)
   };
 //Редактирование профиля
 
@@ -53,7 +51,7 @@ function submitAvatarForm(evt){
   avatarPopupButton.src=avatarInput.value
   avatarInput.value=avatarPopupButton.src  
   patchAvatar(avatarPopupButton)
-  closePopup(profilePopup)
+  closePopup(popupAvatar)
 }
 
 

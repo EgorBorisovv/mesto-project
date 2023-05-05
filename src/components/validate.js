@@ -1,15 +1,4 @@
-const settings = {
-  formSelector: '.popup__form', 
-  inputSelector: '.popup__input', 
-  submitButtonSelector: '.popup__save-button', 
-  errorClass: 'popup__input__label', 
-  inputErrorActive: 'popup__input_error_active', 
-  buttonError: 'popup__save-button_error',
-  errorInput: 'popup__input_error'
-}
-export {settings}
-
-const hasInvalidInput = (inputList,settings) => { 
+const hasInvalidInput = (inputList) => { 
   return inputList.some((inputElement) => { 
     return !inputElement.validity.valid; 
   }) 
@@ -26,7 +15,7 @@ const hideInputError = (formElement, inputElement , settings) => {
   errorElement.classList.remove(settings.inputErrorActive);
   errorElement.textContent = '';
 };
-const setEventListeners = (formElement, settings) => { 
+const setEventListeners = (formElement, settings,buttonElement) => { 
   const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
   toggleButtonState(inputList, buttonElement, settings); 
   inputList.forEach((inputElement) => {
@@ -52,7 +41,7 @@ const isValid = (formElement, inputElement, settings) => {
     inputElement.setCustomValidity("");
   }
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage, settings,settings.errorInput,settings.inputErrorActive);
+    showInputError(formElement, inputElement, inputElement.validationMessage, settings.errorInput,settings,settings.inputErrorActive);
   } else {
     hideInputError(formElement, inputElement, settings,settings.errorInput,settings.inputErrorActive);
   }
@@ -62,7 +51,7 @@ const isValid = (formElement, inputElement, settings) => {
 const enableValidation = (settings) => { 
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
   formList.forEach((formElement) => {
-    setEventListeners(formElement, settings);
+    setEventListeners(formElement,settings,settings.buttonElement);
   });
 };
 export  {showInputError,hideInputError,hasInvalidInput,setEventListeners,toggleButtonState,enableValidation,isValid} 
