@@ -3,48 +3,52 @@ import {
   elements,
 } from '../index.js';
 import { renderCard } from './modal.js';
-import { deleteLike, deliteApi, getCard, putLike } from './api.js';
+import { deleteLike, deliteApi, getCard, putLike,getApiProfile } from './api.js';
 const placeTemplate = document.querySelector('#template').content;
 const modalImage = document.querySelector('.popup_open-image__image');
 const modalText = document.querySelector('.popup_open-image__caption');
 const popupDelite = document.querySelector('.popup_delite')
-let counterLikes = placeTemplate.querySelector('.element__count')
+const counterLikes = placeTemplate.querySelector('.element__count')
 import { closePopup,openPopup} from './modal.js'; 
 const elemenDelite = document.querySelector('.popup__save-button_delite')
 const deliteForm = document.querySelector('form[name="delite"]');
-
+const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
 function  createCard({ name, link,likes,id ,owner}) {
   const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
   placeElement.querySelector('.element__description').textContent = name; 
   placeElement.querySelector('.element__photo').src = link; 
   placeElement.querySelector('.element__photo').alt = name; 
-  counterLikes.textContent = likes.length;
+  counterLikes.textContent = likes.length
+
     //Лайки
-    const like = placeElement.querySelector('.element__button');
+    const like =placeElement.querySelector('.element__button');
     like.addEventListener('click', (evt) => {  
       evt.target.classList.toggle('element__button_active');
-
-        if(like.classList.contains('element__button_active')){
-          putLike(id)
-        }else{
-          deleteLike(id)
-        }
+      if(like.classList.contains('element__button_active')){
+        putLike(id)
+        counterLikes.textContent=+counterLikes.textContent+1
+      }else{
+        deleteLike(id)
+        counterLikes.textContent=+counterLikes.textContent-1  
+      }
       }); 
+  
 
 if(owner === 'e73ca1412a678dbe12a1e470'){
-  const cardsDelite = document.createElement("button")
-      cardsDelite.classList.add('element__delite')
-      placeElement.append(cardsDelite)
         //Удаление карточек
-        cardsDelite.addEventListener('click',function (){     
-          openPopup(popupDelite)
-          deliteForm.addEventListener('submit',function(evt){
-            evt.preventDefault();
-            deliteApi(id)
-            placeElement.remove();
-            closePopup(popupDelite);
+          const cardsDelite = document.createElement("button")
+          cardsDelite.classList.add('element__delite')
+          placeElement.append(cardsDelite)
+          cardsDelite.addEventListener('click',function (){     
+            openPopup(popupDelite)
+            deliteForm.addEventListener('submit',function(evt){
+              evt.preventDefault();
+              deliteApi(id)
+              placeElement.remove();
+              closePopup(popupDelite);
+            })
           })
-        })
+
 }
 
 //Открытие картинок

@@ -164,5 +164,10 @@ iconAvatarClose.addEventListener('click',function(){
 })
 export {closeByEscape}
 //Данные профиля api
-  getApiProfile(profileName,avatar,profileDiscription)
-
+async function loadProfile(){
+  const content = await getApiProfile()
+  profileName.textContent = content.name;
+  avatar.src = content.avatar;
+  profileDiscription.textContent = content.about;
+}
+loadProfile()

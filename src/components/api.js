@@ -7,16 +7,14 @@ const config = {
     },
 };
 //профиль
-async function getApiProfile(name,avatar,discription){
+async function getApiProfile(){
     let response = await fetch(`${config.baseUrl}/users/me`, {
     headers: {
         authorization: `${config.headers.authorization}`
     }
     })
     let content =await checkResponse(response);
-    name.textContent = content.name;
-    avatar.src = content.avatar;
-    discription.textContent = content.about;
+    return content
 }
 ///карточки
 async function getCard(){
@@ -31,7 +29,6 @@ async function getCard(){
 //Удаление карточек
 function deliteApi(id){
     fetch(`${config.baseUrl}/cards/${id}`, {
-        mode: 'cors',
         method: 'DELETE',   
         headers: {
         authorization:`${config.headers.authorization}`,
@@ -43,32 +40,28 @@ function deliteApi(id){
 
 //лайки
 //снятие лайка
-function deleteLike(id,count){
-    fetch(`${config.baseUrl}/cards/likes/${id}`, {
-        mode: 'cors',
-        method: 'DELETE',
-        headers: {
-        authorization: `${config.headers.authorization}`,
-        'Access-Control-Allow-Origin':'*',
-        'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            likes:Number(count)-1
-    })   
+async function deleteLike(id){
+    let response = await fetch(`${config.baseUrl}/cards/likes/${id}`, {
+            method: 'DELETE',
+            headers: {
+            authorization: `${config.headers.authorization}`
+        }
         })
-    }; 
+        let content =await checkResponse(response);
+        return content
+}
+
+
 //постановка лайка
-function putLike(id,count){
-    fetch(`${config.baseUrl}/cards/likes/${id}`, { 
-        method: 'PUT',     
-        headers: {    
-        authorization: `${config.headers.authorization}`,     
-        'Content-Type': 'application/json'    
-        },
-        body: JSON.stringify({
-            likes:Number(count)+1
-    })   
-});  
+async function putLike(id){
+    let response = await fetch(`${config.baseUrl}/cards/likes/${id}`, {
+        method: 'PUT',
+        headers: {
+        authorization: `${config.headers.authorization}`
+    }
+    })
+    let content =await checkResponse(response);
+    return content
 }
 //создание карточки
 function createApiCard(cardName,cardLink){

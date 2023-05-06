@@ -15,8 +15,11 @@ import {
 import{closeByEscape} from '../index.js'
 import { createApiCard, patchAvatar, patchProfile } from './api.js';
 import {createCard} from './card.js'
-
-
+async function loadLike(){
+  const likesData =await getCard()
+  const likesDataLength = likesData.likes.length
+  return likesDataLength
+}
 //Открытие  поп-апа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -38,7 +41,7 @@ function submitCardsForm(evt){
   evt.preventDefault();
   const cardName = inputName.value ;
   const cardLink = imageInput.value ;
-  const newCard = createCard({name:cardName,link:cardLink,likes:'0'});  
+  const newCard = createCard({name:cardName,link:cardLink,likes:loadLike()}); 
   renderCard(newCard, elements);
   evt.target.reset();
   createApiCard(cardName,cardLink)
