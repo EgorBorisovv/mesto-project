@@ -20,23 +20,27 @@ function  createCard({ name, link,likes,id ,owner}) {
   placeElement.querySelector('.element__description').textContent = name; 
   placeElement.querySelector('.element__photo').src = link; 
   placeElement.querySelector('.element__photo').alt = name; 
+  const counterLikes = placeElement.querySelector('.element__count')
   counterLikes.textContent=likes.length
     //Лайки
-    const like =placeElement.querySelector('.element__button');
+    const like = placeElement.querySelector('.element__button');
     like.addEventListener('click', (evt) => {  
-      const counterLikesPage = document.querySelector('.element__count')
       evt.target.classList.toggle('element__button_active');
+      const counterLikesPage = placeElement.querySelector('.element__count')
+      
         if(like.classList.contains('element__button_active')){
             putLike(id)
-            counterLikesPage.textContent=+counterLikesPage.textContent+1
+            counterLikesPage.textContent=+counterLikes.textContent+1
         }else{
           deleteLike(id)
-          counterLikesPage.textContent=+counterLikesPage.textContent-1
-      }
-      }); 
-    
+          counterLikesPage.textContent=+counterLikes.textContent-1
+      }   
+      });  
 
-if(owner === 'e73ca1412a678dbe12a1e470'){
+            if(likes._id == owner){
+              like.classList.add('element__button_active')
+            }           
+        
         //Удаление карточек
           const cardsDelite = document.createElement("button")
           cardsDelite.classList.add('element__delite')
@@ -50,7 +54,8 @@ if(owner === 'e73ca1412a678dbe12a1e470'){
               closePopup(popupDelite);
             })
           })
-
+          if(owner !== 'e73ca1412a678dbe12a1e470'){
+            cardsDelite.style.display='none';
 }
 
 //Открытие картинок
@@ -75,7 +80,7 @@ const images = placeElement.querySelector('.element__photo');
           link: item.link,
           likes: item.likes,
           id:item._id,
-          owner:item.owner._id
+          owner:item.owner._id,
       };
       });
 

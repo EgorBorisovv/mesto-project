@@ -40,28 +40,41 @@ function deliteApi(id){
 
 //лайки
 //снятие лайка
-async function deleteLike(id){
-    let response = await fetch(`${config.baseUrl}/cards/likes/${id}`, {
+function deleteLike(id){
+    fetch(`${config.baseUrl}/cards/likes/${id}`, {
             method: 'DELETE',
             headers: {
-            authorization: `${config.headers.authorization}`
+            authorization: `${config.headers.authorization}`,
+            'Content-Type':'application/json'
+            },body:JSON.stringify({
+                likes:-1
+            })
+        }).then(response=>{
+            return response.json()           
+        }).then(data=> {
+            return data
         }
-        })
-        let content =await checkResponse(response);
-        return content
+        );
 }
 
 
 //постановка лайка
-async function putLike(id){
-    let response = await fetch(`${config.baseUrl}/cards/likes/${id}`, {
+function putLike(id){
+    fetch(`${config.baseUrl}/cards/likes/${id}`, {
         method: 'PUT',
         headers: {
-        authorization: `${config.headers.authorization}`
-    }
-    })
-    let content =await checkResponse(response);
-    return content
+        authorization: `${config.headers.authorization}`,
+        'Content-Type':'application/json'
+        },body:JSON.stringify({
+            likes:+1
+        })
+    }).then(response=>{
+        return response.json()
+    }).then(data=> 
+        {
+            return data
+        }
+    );
 }
 //создание карточки
 function createApiCard(cardName,cardLink){
