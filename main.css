@@ -14,7 +14,7 @@
 .profile__description{color:#fff;font-family:Inter,Arial,sans-serif;font-size:18px;font-style:normal;font-weight:400;line-height:22px;margin:16px 0 0;max-width:336px;position:relative}@media screen and (max-width:1279px){.profile__description{font-size:14px;line-height:17px;text-align:center}}
 .elements{-moz-column-gap:17px;column-gap:17px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;margin:51px auto 0;max-width:880px;position:relative;row-gap:20px}@media screen and (max-width:1279px){.elements{grid-template-columns:1fr;max-width:282px}}
 .element{background:#fff;border-radius:10px;height:361px;max-width:282px;overflow:hidden;position:relative}
-.element__delite{background-color:transparent;background-image:url(ce3b64935accf9b8212e.svg);border:0;cursor:pointer;height:19px;left:244px;margin-top:5px;position:absolute;top:20px;width:18px}.element__delite:hover{opacity:.5}
+.element__delite{background-color:transparent;background-image:url(ce3b64935accf9b8212e.svg);border:0;cursor:pointer;display:none;height:19px;left:244px;margin-top:5px;position:absolute;top:20px;width:18px}.element__delite:hover{opacity:.5}
 .element__photo{cursor:pointer;height:282px;-o-object-fit:cover;object-fit:cover;-o-object-position:center center;object-position:center center;position:absolute;width:282px}
 .element__description{color:#000;display:flex;font-family:Inter,Arial,sans-serif;font-size:24px;font-style:normal;font-weight:900;justify-content:space-between;line-height:29px;margin:307px auto 0;max-width:246px;position:relative}
 .element__button{background-color:transparent;background-image:url(cbed5331d270056562b2.svg);border:0;cursor:pointer;height:19px;margin-top:5px;position:relative;width:22px}.element__button:hover{opacity:.5}
