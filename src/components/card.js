@@ -36,26 +36,25 @@ function  createCard({ name, link,likes,id ,owner}) {
           counterLikesPage.textContent=+counterLikes.textContent-1
       }   
       });  
-
-            if(likes._id == owner){
-              like.classList.add('element__button_active')
-            }           
+        for(let i = 0;i<=likes.length;i++){
+          if (likes[i] !==undefined){
+            if(likes[i]._id === owner){
+            like.classList.add('element__button_active')
+          }     
+          }
+        }
         
         //Удаление карточек
           const cardsDelite = document.createElement("button")
           cardsDelite.classList.add('element__delite')
           placeElement.append(cardsDelite)
           cardsDelite.addEventListener('click',function (){     
-            openPopup(popupDelite)
-            deliteForm.addEventListener('submit',function(evt){
-              evt.preventDefault();
-              deliteApi(id)
+              deliteApi(id);
               placeElement.remove();
-              closePopup(popupDelite);
             })
-          })
-          if(owner !== 'e73ca1412a678dbe12a1e470'){
-            cardsDelite.style.display='none';
+            console.log(owner)
+          if(owner === 'e73ca1412a678dbe12a1e470'||owner === undefined ){
+            cardsDelite.style.display='block';
 }
 
 //Открытие картинок

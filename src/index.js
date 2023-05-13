@@ -118,6 +118,7 @@ popupProfileOpenButton.addEventListener('click',function(){
 //Открытие поп апа карточки
 cardsButtonPlus.addEventListener('click',function(){
   openPopup(popupCards);
+  document.querySelector('.popup__save-button_cards').classList.add(settingsCard.buttonError);
 });
 
 iconProfileClose.addEventListener('click',function(){
