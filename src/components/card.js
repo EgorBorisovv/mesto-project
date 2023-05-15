@@ -38,7 +38,7 @@ function  createCard({ name, link,likes,id ,owner}) {
       });  
         for(let i = 0;i<=likes.length;i++){
           if (likes[i] !==undefined){
-            if(likes[i]._id === owner){
+            if(likes[i]._id === 'e73ca1412a678dbe12a1e470'){
             like.classList.add('element__button_active')
           }     
           }
@@ -52,7 +52,6 @@ function  createCard({ name, link,likes,id ,owner}) {
               deliteApi(id);
               placeElement.remove();
             })
-            console.log(owner)
           if(owner === 'e73ca1412a678dbe12a1e470'||owner === undefined ){
             cardsDelite.style.display='block';
 }
@@ -100,4 +99,4 @@ const images = placeElement.querySelector('.element__photo');
 
 
   loadApiCard()
-  export {counterLikes,createCard}
+  export {counterLikes,createCard,loadApiCard}

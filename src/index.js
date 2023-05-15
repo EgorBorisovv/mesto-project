@@ -1,4 +1,4 @@
-const avatar = document.querySelector('.profile__avatar')
+const avatar = document.querySelector('.profile__avatar');
 const popupProfileOpenButton = document.querySelector('.profile__button_edit');
 const popupProfile = document.querySelector('#profile');
 const iconProfileClose = document.querySelector('#close_profile');
@@ -52,7 +52,7 @@ export {popupProfileOpenButton,
   cardsOverlay,
   imageOverlay,
   avatarPopupButton,
-  avatarInput,avatar,popupAvatar};
+  avatarInput,avatar,popupAvatar,avatarSave};
 
   import {getApiProfile} from './components/api.js'
   import {openPopup,closePopup,submitProfileForm,submitCardsForm,submitAvatarForm} from './components/modal.js'
@@ -152,7 +152,7 @@ function closeByEscape(evt) {
 
 // render();
 
-cardsForm.addEventListener('submit', submitCardsForm)
+cardsForm.addEventListener('submit',submitCardsForm)
 formProfile.addEventListener('submit',submitProfileForm)
 avatarSave.addEventListener('submit',submitAvatarForm)
 

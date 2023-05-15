@@ -10,12 +10,15 @@ import {
   profileName,
   profileDiscription,
   avatarPopupButton,
-  avatarInput,popupAvatar
+  avatarInput,popupAvatar,formProfile,closeByEscape,avatarSave,cardsForm
 } from '../index.js';
-import{closeByEscape} from '../index.js'
-import { createApiCard, patchAvatar, patchProfile,getCard } from './api.js';
-import {createCard} from './card.js'
 
+import { createApiCard, patchAvatar, patchProfile,getApiProfile} from './api.js';
+import {createCard,loadApiCard} from './card.js'
+const profileSave = document.querySelector('.popup__save-button_profile')
+const cardsSave = document.querySelector('.popup__save-button_cards')
+const avatarSaveButton = document.querySelector('.popup__save-button_avatar')
+let loading = true;
 //Открытие  поп-апа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -32,7 +35,17 @@ export{renderCard}
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEscape);
+  loading=false;
 };
+
+
+if(loading = false){
+  profileSave.textContent = 'сохранение...'
+  cardsSave.textContent = 'сохранение...'
+  avatarSaveButton.textContent = 'сохранение...'
+  }
+
+
 function submitCardsForm(evt){
   evt.preventDefault();
   const cardName = inputName.value ;
@@ -41,9 +54,10 @@ function submitCardsForm(evt){
   renderCard(newCard, elements);
   evt.target.reset();
   createApiCard(cardName,cardLink)
-  closePopup(popupCards)
-  console.log()
+  setTimeout(closePopup(popupCards),2000)
+  location.reload()
   };
+
 //Редактирование профиля
 
 function submitAvatarForm(evt){
@@ -51,7 +65,7 @@ function submitAvatarForm(evt){
   avatarPopupButton.src=avatarInput.value
   avatarInput.value=avatarPopupButton.src  
   patchAvatar(avatarPopupButton)
-  closePopup(popupAvatar)
+  setTimeout(closePopup(popupAvatar),2000)
 }
 
 
@@ -61,6 +75,6 @@ function submitProfileForm(evt){
     profileName.textContent = formProfileNameInput.value;
     profileDiscription.textContent = hobby.value;
     patchProfile(profileName,profileDiscription)
-    closePopup(profilePopup)
+    setTimeout(closePopup(profilePopup),2000)
     };
 export {openPopup,closePopup,submitProfileForm,submitCardsForm,submitAvatarForm}

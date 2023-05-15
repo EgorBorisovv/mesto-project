@@ -1,4 +1,5 @@
 //Настройки
+import { data } from "autoprefixer";
 import { checkResponse } from "./utils";
 const config = {
     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-23',
@@ -7,7 +8,7 @@ const config = {
     },
 };
 //профиль
-async function getApiProfile(){
+async function getApiProfile(button){
     let response = await fetch(`${config.baseUrl}/users/me`, {
     headers: {
         authorization: `${config.headers.authorization}`
@@ -15,7 +16,9 @@ async function getApiProfile(){
     })
     let content =await checkResponse(response);
     return content
+
 }
+
 ///карточки
 async function getCard(){
     let response = await fetch(`${config.baseUrl}/cards`, {
@@ -35,7 +38,11 @@ function deliteApi(id){
         'Access-Control-Allow-Origin':'*',
         'Content-Type': 'application/json',
         },
-    });
+    }).then(response =>{
+        checkResponse(response)
+    }).then(data =>{
+        return data
+    })
 }
 
 //лайки
@@ -50,7 +57,7 @@ function deleteLike(id){
                 likes:-1
             })
         }).then(response=>{
-            return response.json()           
+            checkResponse(response)         
         }).then(data=> {
             return data
         }
@@ -69,7 +76,7 @@ function putLike(id){
             likes:+1
         })
     }).then(response=>{
-        return response.json()
+        checkResponse(response)
     }).then(data=> 
         {
             return data
@@ -86,10 +93,16 @@ function createApiCard(cardName,cardLink){
     },
     body: JSON.stringify({
     "name": cardName,
-    "link": cardLink
+    "link": cardLink,
+    
 })
+}).then(response =>{
+    checkResponse(response)
+}).then(data =>{
+    return data
 })
 }
+
 //Изменение аватара
 function patchAvatar(image){
     fetch(`${config.baseUrl}/users/me/avatar`, {
@@ -101,7 +114,11 @@ headers: {
 body: JSON.stringify({
     avatar: image.src 
 })
-});
+}).then(response =>{
+    checkResponse(response)
+}).then(data =>{
+    return data
+})
 }
 //Изменение профиля
 function patchProfile(name,discription){
@@ -115,6 +132,10 @@ fetch(`${config.baseUrl}/users/me`, {
         name: name.textContent,
         about: discription.textContent
     })
-}); 
+}).then(response =>{
+    checkResponse(response)
+}).then(data =>{
+    return data
+})
 }
 export {getApiProfile,getCard,deliteApi,putLike,createApiCard,patchAvatar,patchProfile,deleteLike}

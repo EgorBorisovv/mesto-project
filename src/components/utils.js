@@ -4,7 +4,4 @@ function checkResponse(res) {
     }
     return Promise.reject(`Ошибка ${res.status}`);
 }
-function request(url, options) {
-    return fetch(url, options).then(checkResponse)
-}
 export{checkResponse}
