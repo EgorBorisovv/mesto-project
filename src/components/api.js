@@ -1,43 +1,39 @@
 //Настройки
-import { data } from "autoprefixer";
 import { checkResponse } from "./utils";
 const config = {
     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-23',
     headers: {
     authorization: '005699ab-4782-4879-a334-2468c75341c4',
+    'Content-Type': 'application/json'
     },
 };
 //профиль
 async function getApiProfile(button){
-    let response = await fetch(`${config.baseUrl}/users/me`, {
+    const response = await fetch(`${config.baseUrl}/users/me`, {
     headers: {
-        authorization: `${config.headers.authorization}`
+        authorization:`${config.headers.authorization}`,
     }
     })
-    let content =await checkResponse(response);
+    const content =await checkResponse(response);
     return content
 
 }
 
 ///карточки
 async function getCard(){
-    let response = await fetch(`${config.baseUrl}/cards`, {
+    const response = await fetch(`${config.baseUrl}/cards`, {
     headers: {
         authorization: `${config.headers.authorization}`
     }
     })
-    let content = await checkResponse(response); 
+    const content = await checkResponse(response); 
     return content
 }
 //Удаление карточек
 function deliteApi(id){
     fetch(`${config.baseUrl}/cards/${id}`, {
         method: 'DELETE',   
-        headers: {
-        authorization:`${config.headers.authorization}`,
-        'Access-Control-Allow-Origin':'*',
-        'Content-Type': 'application/json',
-        },
+        headers:config.headers,
     }).then(response =>{
         checkResponse(response)
     }).then(data =>{
@@ -50,10 +46,8 @@ function deliteApi(id){
 function deleteLike(id){
     fetch(`${config.baseUrl}/cards/likes/${id}`, {
             method: 'DELETE',
-            headers: {
-            authorization: `${config.headers.authorization}`,
-            'Content-Type':'application/json'
-            },body:JSON.stringify({
+            headers:config.headers
+            ,body:JSON.stringify({
                 likes:-1
             })
         }).then(response=>{
@@ -69,10 +63,8 @@ function deleteLike(id){
 function putLike(id){
     fetch(`${config.baseUrl}/cards/likes/${id}`, {
         method: 'PUT',
-        headers: {
-        authorization: `${config.headers.authorization}`,
-        'Content-Type':'application/json'
-        },body:JSON.stringify({
+        headers:config.headers
+        ,body:JSON.stringify({
             likes:+1
         })
     }).then(response=>{
@@ -84,13 +76,10 @@ function putLike(id){
     );
 }
 //создание карточки
-function createApiCard(cardName,cardLink){
+function createApiCard(cardName,cardLink,button){
         fetch('https://nomoreparties.co/v1/plus-cohort-23/cards', {
     method: 'POST',
-    headers: {
-    'Content-Type': 'application/json',
-    authorization: '005699ab-4782-4879-a334-2468c75341c4'
-    },
+    headers:config.headers,
     body: JSON.stringify({
     "name": cardName,
     "link": cardLink,
@@ -100,17 +89,18 @@ function createApiCard(cardName,cardLink){
     checkResponse(response)
 }).then(data =>{
     return data
+}).catch((err)=>{
+    console.log(err);
+}).finally(() =>{
+    button.textContent='сохранение...'
 })
 }
 
 //Изменение аватара
-function patchAvatar(image){
+function patchAvatar(image,button){
     fetch(`${config.baseUrl}/users/me/avatar`, {
 method: 'PATCH',
-headers: {
-    authorization: `${config.headers.authorization}`,
-    'Content-Type': 'application/json'
-},
+headers: config.headers,
 body: JSON.stringify({
     avatar: image.src 
 })
@@ -118,16 +108,17 @@ body: JSON.stringify({
     checkResponse(response)
 }).then(data =>{
     return data
+}).catch((err)=>{
+    console.log(err);
+}).finally(() =>{
+    button.textContent='сохранение...'
 })
 }
 //Изменение профиля
-function patchProfile(name,discription){
+function patchProfile(name,discription,button){
 fetch(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
-    headers: {
-    authorization: `${config.headers.authorization}`,
-    'Content-Type': 'application/json'
-    },
+    headers:config.headers,
         body: JSON.stringify({
         name: name.textContent,
         about: discription.textContent
@@ -136,6 +127,10 @@ fetch(`${config.baseUrl}/users/me`, {
     checkResponse(response)
 }).then(data =>{
     return data
+}).catch((err)=>{
+    console.log(err);
+}).finally(() =>{
+    button.textContent='сохранение...'
 })
 }
 export {getApiProfile,getCard,deliteApi,putLike,createApiCard,patchAvatar,patchProfile,deleteLike}

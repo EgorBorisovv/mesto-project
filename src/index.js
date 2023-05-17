@@ -1,3 +1,4 @@
+let userID;
 const avatar = document.querySelector('.profile__avatar');
 const popupProfileOpenButton = document.querySelector('.profile__button_edit');
 const popupProfile = document.querySelector('#profile');
@@ -52,7 +53,7 @@ export {popupProfileOpenButton,
   cardsOverlay,
   imageOverlay,
   avatarPopupButton,
-  avatarInput,avatar,popupAvatar,avatarSave};
+  avatarInput,avatar,popupAvatar,avatarSave,userID};
 
   import {getApiProfile} from './components/api.js'
   import {openPopup,closePopup,submitProfileForm,submitCardsForm,submitAvatarForm} from './components/modal.js'
@@ -170,5 +171,6 @@ async function loadProfile(){
   profileName.textContent = content.name;
   avatar.src = content.avatar;
   profileDiscription.textContent = content.about;
+  userID = content._id
 }
 loadProfile()

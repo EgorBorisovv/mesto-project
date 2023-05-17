@@ -1,9 +1,9 @@
 import {
   popupImage,
-  elements,
+  elements,userID
 } from '../index.js';
 import { renderCard } from './modal.js';
-import { deleteLike, deliteApi, getCard, putLike} from './api.js';
+import { deleteLike, deliteApi, getApiProfile, getCard, putLike} from './api.js';
 const placeTemplate = document.querySelector('#template').content;
 const modalImage = document.querySelector('.popup_open-image__image');
 const modalText = document.querySelector('.popup_open-image__caption');
@@ -14,6 +14,8 @@ const elemenDelite = document.querySelector('.popup__save-button_delite')
 const deliteForm = document.querySelector('form[name="delite"]');
 const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
 const counterLikes = placeElement.querySelector('.element__count')
+
+
 
 function  createCard({ name, link,likes,id ,owner}) {
   const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
@@ -38,7 +40,7 @@ function  createCard({ name, link,likes,id ,owner}) {
       });  
         for(let i = 0;i<=likes.length;i++){
           if (likes[i] !==undefined){
-            if(likes[i]._id === 'e73ca1412a678dbe12a1e470'){
+            if(likes[i]._id === userID){
             like.classList.add('element__button_active')
           }     
           }
@@ -52,7 +54,7 @@ function  createCard({ name, link,likes,id ,owner}) {
               deliteApi(id);
               placeElement.remove();
             })
-          if(owner === 'e73ca1412a678dbe12a1e470'||owner === undefined ){
+          if(owner === userID||owner === undefined ){
             cardsDelite.style.display='block';
 }
 
@@ -81,7 +83,6 @@ const images = placeElement.querySelector('.element__photo');
           owner:item.owner._id,
       };
       });
-
       //закрытие картинок
       const iconCloseImage = document.querySelector('#close_image');
       iconCloseImage.addEventListener('click',function(){
