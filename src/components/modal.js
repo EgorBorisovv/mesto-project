@@ -14,7 +14,7 @@ import {
 } from '../index.js';
 
 import { createApiCard, patchAvatar, patchProfile,getApiProfile} from './api.js';
-import {createCard,loadApiCard} from './card.js'
+import {createCard,loadApiCard,cardId} from './card.js'
 const profileSave = document.querySelector('.popup__save-button_profile')
 const cardsSave = document.querySelector('.popup__save-button_cards')
 const avatarSaveButton = document.querySelector('.popup__save-button_avatar')
@@ -43,10 +43,10 @@ function submitCardsForm(evt){
   evt.preventDefault();
   const cardName = inputName.value ;
   const cardLink = imageInput.value ;
-  const newCard = createCard({name:cardName,link:cardLink,likes:0,id:userID}); 
+  createApiCard(cardName,cardLink,cardsSave)
+  const newCard = createCard({name:cardName,link:cardLink,likes:0,id:cardId,owner:userID});
   renderCard(newCard, elements);
   evt.target.reset();
-  createApiCard(cardName,cardLink,cardsSave)
   closePopup(popupCards)
   };
 

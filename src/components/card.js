@@ -3,12 +3,12 @@ import {
   elements,userID
 } from '../index.js';
 import { renderCard } from './modal.js';
-import { deleteLike, deliteApi, getApiProfile, getCard, putLike} from './api.js';
+import { deleteLike, deliteApi, getApiProfile, getCard, putLike,createApiCard} from './api.js';
 const placeTemplate = document.querySelector('#template').content;
 const modalImage = document.querySelector('.popup_open-image__image');
 const modalText = document.querySelector('.popup_open-image__caption');
 const popupDelite = document.querySelector('.popup_delite')
-
+let cardId;
 import { closePopup,openPopup} from './modal.js'; 
 const elemenDelite = document.querySelector('.popup__save-button_delite')
 const deliteForm = document.querySelector('form[name="delite"]');
@@ -45,16 +45,15 @@ function  createCard({ name, link,likes,id ,owner}) {
           }     
           }
         }
-        
+        console.log(id)
         //Удаление карточек
           const cardsDelite = document.createElement("button")
           cardsDelite.classList.add('element__delite')
           placeElement.append(cardsDelite)
           cardsDelite.addEventListener('click',function (){     
-              deliteApi(id);
-              placeElement.remove();
+              deliteApi(id,placeElement);
             })
-          if(owner === userID||owner === undefined ){
+          if(owner === userID ){
             cardsDelite.style.display='block';
 }
 
@@ -67,7 +66,7 @@ const images = placeElement.querySelector('.element__photo');
       modalText.textContent = images.alt;
       openPopup(popupImage)
     });
-    
+
   return placeElement
   
   }
@@ -96,8 +95,11 @@ const images = placeElement.querySelector('.element__photo');
       });
       }
       render()
+      for(let i=0;i<=content.length;i++){
+        if(content[i]!==undefined){
+          cardId = content[i]._id
+        }
+      }
   }
-
-
   loadApiCard()
-  export {counterLikes,createCard,loadApiCard}
+  export {counterLikes,createCard,loadApiCard,cardId}

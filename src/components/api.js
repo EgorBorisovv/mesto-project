@@ -30,14 +30,17 @@ async function getCard(){
     return content
 }
 //Удаление карточек
-function deliteApi(id){
+function deliteApi(id,element){
     fetch(`${config.baseUrl}/cards/${id}`, {
         method: 'DELETE',   
         headers:config.headers,
     }).then(response =>{
+        element.remove()
         checkResponse(response)
     }).then(data =>{
         return data
+    }).catch((err)=>{
+        console.log(err);
     })
 }
 
@@ -55,7 +58,9 @@ function deleteLike(id){
         }).then(data=> {
             return data
         }
-        );
+        ).catch((err)=>{
+            console.log(err);
+        });
 }
 
 
@@ -73,7 +78,9 @@ function putLike(id){
         {
             return data
         }
-    );
+    ).catch((err)=>{
+        console.log(err);
+    });
 }
 //создание карточки
 function createApiCard(cardName,cardLink,button){
@@ -83,16 +90,16 @@ function createApiCard(cardName,cardLink,button){
     body: JSON.stringify({
     "name": cardName,
     "link": cardLink,
-    
-})
+})}).finally(() =>{
+    button.textContent='сохранение...'
 }).then(response =>{
+    button.textContent='Создать'
     checkResponse(response)
 }).then(data =>{
     return data
 }).catch((err)=>{
     console.log(err);
-}).finally(() =>{
-    button.textContent='сохранение...'
+
 })
 }
 
@@ -103,15 +110,16 @@ method: 'PATCH',
 headers: config.headers,
 body: JSON.stringify({
     avatar: image.src 
-})
+})}).finally(() =>{
+    button.textContent='сохранение...'
 }).then(response =>{
+    button.textContent='Создать'
     checkResponse(response)
 }).then(data =>{
     return data
 }).catch((err)=>{
     console.log(err);
-}).finally(() =>{
-    button.textContent='сохранение...'
+
 })
 }
 //Изменение профиля
@@ -123,14 +131,15 @@ fetch(`${config.baseUrl}/users/me`, {
         name: name.textContent,
         about: discription.textContent
     })
+}).finally(() =>{
+    button.textContent='сохранение...'
 }).then(response =>{
+    button.textContent='Создать'
     checkResponse(response)
 }).then(data =>{
     return data
 }).catch((err)=>{
     console.log(err);
-}).finally(() =>{
-    button.textContent='сохранение...'
 })
 }
 export {getApiProfile,getCard,deliteApi,putLike,createApiCard,patchAvatar,patchProfile,deleteLike}
