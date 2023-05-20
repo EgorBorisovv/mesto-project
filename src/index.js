@@ -1,4 +1,5 @@
 let userID;
+let cardId;
 const avatar = document.querySelector('.profile__avatar');
 const popupProfileOpenButton = document.querySelector('.profile__button_edit');
 const popupProfile = document.querySelector('#profile');
@@ -53,12 +54,12 @@ export {popupProfileOpenButton,
   cardsOverlay,
   imageOverlay,
   avatarPopupButton,
-  avatarInput,avatar,popupAvatar,avatarSave,userID};
+  avatarInput,avatar,popupAvatar,avatarSave,userID,cardId};
 
-  import {getApiProfile} from './components/api.js'
+  import {getApiProfile, getCards} from './components/api.js'
   import {openPopup,closePopup,submitProfileForm,submitCardsForm,submitAvatarForm} from './components/modal.js'
   import {enableValidation,setEventListeners,toggleButtonState} from './components/validate.js'
-
+  import {createCard,renderCard } from './components/card.js';
 const buttonActive = new URL('./image/black_like.svg',import.meta.url);
 const button = new URL('./image/like.svg',import.meta.url);
 const elementDelite = new URL('./image/Trash.svg',import.meta.url);
@@ -69,10 +70,9 @@ import './components/card.js';
 import './components/modal.js';
 import './components/validate.js';
 
-//валидация профиля
-const settingsProfile = {
+const settings = {
   formSelector:'.popup__form', 
-  inputSelector:'.popup__input_profile', 
+  inputSelector:'.popup__input', 
   errorClass: document.querySelector('popup__input__label'), 
   inputErrorActive:'popup__input_error_active', 
   buttonError: 'popup__save-button_error',
@@ -80,32 +80,8 @@ const settingsProfile = {
   inputElement:document.querySelector('.popup__input'),
   buttonElement:document.querySelector('.popup__save-button')
 }
-enableValidation(settingsProfile)
-//Валидация карточек
-const settingsCard = {
-  formSelector:'.popup__form_cards', 
-  inputSelector:'.popup__input_cards', 
-  errorClass: document.querySelector('popup__input__label_cards'), 
-  inputErrorActive:'popup__input_error_active', 
-  buttonError: 'popup__save-button_error',
-  errorInput:'popup__input_error',
-  inputElement:document.querySelector('.popup__input_cards'),
-  buttonElement:document.querySelector('.popup__save-button_cards')
-}
-enableValidation(settingsCard)
+enableValidation(settings)
 
-//Валидация аватара
-const settingsAvatar = {
-  formSelector:'.popup__form_avatar', 
-  inputSelector:'.popup__input_avatar', 
-  errorClass: document.querySelector('popup__input__label_avatar'), 
-  inputErrorActive:'popup__input_error_active', 
-  buttonError: 'popup__save-button_error',
-  errorInput:'popup__input_error',
-  inputElement:document.querySelector('.popup__input_avatar'),
-  buttonElement:document.querySelector('.popup__save-button_avatar')
-}
-enableValidation(settingsAvatar)
 //открытие поп-апа аватара
 avatarPopupButton.addEventListener('click',function(){
   openPopup(popupAvatar);
@@ -144,12 +120,7 @@ avatarOverlay.addEventListener('click',function(){
   closePopup(popupAvatar)
 });
 
-function closeByEscape(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened') 
-    closePopup(openedPopup)
-  }
-}
+
 
 // render();
 
@@ -164,13 +135,36 @@ iconCardsClose.addEventListener('click',function(){
 iconAvatarClose.addEventListener('click',function(){
   closePopup(popupAvatar)
 })
-export {closeByEscape}
 //Данные профиля api
-async function loadProfile(){
-  const content = await getApiProfile()
-  profileName.textContent = content.name;
-  avatar.src = content.avatar;
-  profileDiscription.textContent = content.about;
-  userID = content._id
-}
-loadProfile()
+Promise.all([getApiProfile(),getCards()])
+.then(([userData,cards]) =>{
+    const contentProfile = userData;
+    userID = userData._id;
+    profileName.textContent = contentProfile.name;
+    avatar.src = contentProfile.avatar;
+    profileDiscription.textContent = contentProfile.about;
+    const contentCards  = cards;
+
+    const placeInfo = contentCards.map(function (item) {
+      return {
+          name: item.name,
+          link: item.link,
+          likes: item.likes,
+          id:item._id,
+          owner:item.owner._id,
+      };
+      });
+      cardId =placeInfo[0].id
+      console.log(cardId)
+      //закрытие картинок
+      
+      function render() {
+      placeInfo.forEach(card =>{
+          const basicCard = createCard(card);
+          renderCard(basicCard, elements);
+      });
+      }
+      render()
+}).catch(err =>{
+  console.log(err)
+})

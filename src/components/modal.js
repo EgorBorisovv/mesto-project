@@ -1,4 +1,5 @@
 
+
 import {
   popupCards,
   formProfileNameInput,
@@ -10,11 +11,11 @@ import {
   profileName,
   profileDiscription,
   avatarPopupButton,
-  avatarInput,popupAvatar,formProfile,closeByEscape,avatarSave,cardsForm,userID
+  avatarInput,popupAvatar,formProfile,avatarSave,cardsForm,userID,cardId
 } from '../index.js';
 
 import { createApiCard, patchAvatar, patchProfile,getApiProfile} from './api.js';
-import {createCard,loadApiCard,cardId} from './card.js'
+import {createCard,loadApiCard,renderCard} from './card.js'
 const profileSave = document.querySelector('.popup__save-button_profile')
 const cardsSave = document.querySelector('.popup__save-button_cards')
 const avatarSaveButton = document.querySelector('.popup__save-button_avatar')
@@ -24,13 +25,14 @@ function openPopup(popup) {
   document.addEventListener('keydown', closeByEscape);
 };
 
-//Закрытие поп-апа профиль
-function renderCard(card,container) {
-    container.prepend(card);
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened') 
+    closePopup(openedPopup)
   }
+}
+//Закрытие поп-апа профиль
 
-
-export{renderCard}
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEscape);
@@ -40,15 +42,15 @@ function closePopup(popup) {
 
 
 function submitCardsForm(evt){
-  evt.preventDefault();
+  evt.preventDefault()
   const cardName = inputName.value ;
   const cardLink = imageInput.value ;
-  createApiCard(cardName,cardLink,cardsSave)
-  const newCard = createCard({name:cardName,link:cardLink,likes:0,id:cardId,owner:userID});
-  renderCard(newCard, elements);
-  evt.target.reset();
-  closePopup(popupCards)
-  };
+    createApiCard(cardName,cardLink,cardsSave)
+      const newCard = createCard({name:cardName,link:cardLink,likes:0,id:cardId,owner:userID});
+      renderCard(newCard, elements);
+      evt.target.reset();
+      closePopup(popupCards)
+  }
 
 //Редактирование профиля
 
@@ -57,16 +59,16 @@ function submitAvatarForm(evt){
   avatarPopupButton.src=avatarInput.value
   avatarInput.value=avatarPopupButton.src  
   patchAvatar(avatarPopupButton,avatarSaveButton)
-  closePopup(popupAvatar)
+    closePopup(popupAvatar)
 }
 
 
 
 function submitProfileForm(evt){
     evt.preventDefault();
-    profileName.textContent = formProfileNameInput.value;
-    profileDiscription.textContent = hobby.value;
     patchProfile(profileName,profileDiscription,profileSave)
-    closePopup(profilePopup)
+      profileName.textContent = formProfileNameInput.value;
+      profileDiscription.textContent = hobby.value;
+      closePopup(profilePopup)
     };
 export {openPopup,closePopup,submitProfileForm,submitCardsForm,submitAvatarForm}

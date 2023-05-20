@@ -20,7 +20,7 @@ async function getApiProfile(button){
 }
 
 ///карточки
-async function getCard(){
+async function getCards(){
     const response = await fetch(`${config.baseUrl}/cards`, {
     headers: {
         authorization: `${config.headers.authorization}`
@@ -30,17 +30,14 @@ async function getCard(){
     return content
 }
 //Удаление карточек
-function deliteApi(id,element){
+function deliteApi(id){
     fetch(`${config.baseUrl}/cards/${id}`, {
         method: 'DELETE',   
         headers:config.headers,
     }).then(response =>{
-        element.remove()
         checkResponse(response)
     }).then(data =>{
         return data
-    }).catch((err)=>{
-        console.log(err);
     })
 }
 
@@ -54,13 +51,11 @@ function deleteLike(id){
                 likes:-1
             })
         }).then(response=>{
-            checkResponse(response)         
+            checkResponse(response)       
         }).then(data=> {
             return data
         }
-        ).catch((err)=>{
-            console.log(err);
-        });
+        )
 }
 
 
@@ -77,53 +72,40 @@ function putLike(id){
     }).then(data=> 
         {
             return data
+
         }
-    ).catch((err)=>{
-        console.log(err);
-    });
+    )
 }
 //создание карточки
-function createApiCard(cardName,cardLink,button){
-        fetch('https://nomoreparties.co/v1/plus-cohort-23/cards', {
+function createApiCard(cardName,cardLink){
+        fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
     headers:config.headers,
     body: JSON.stringify({
     "name": cardName,
     "link": cardLink,
-})}).finally(() =>{
-    button.textContent='сохранение...'
-}).then(response =>{
-    button.textContent='Создать'
+})}).then(response =>{
     checkResponse(response)
 }).then(data =>{
     return data
-}).catch((err)=>{
-    console.log(err);
-
 })
 }
 
 //Изменение аватара
-function patchAvatar(image,button){
+function patchAvatar(image){
     fetch(`${config.baseUrl}/users/me/avatar`, {
 method: 'PATCH',
 headers: config.headers,
 body: JSON.stringify({
     avatar: image.src 
-})}).finally(() =>{
-    button.textContent='сохранение...'
-}).then(response =>{
-    button.textContent='Создать'
+})}).then(response =>{
     checkResponse(response)
 }).then(data =>{
     return data
-}).catch((err)=>{
-    console.log(err);
-
 })
 }
 //Изменение профиля
-function patchProfile(name,discription,button){
+function patchProfile(name,discription){
 fetch(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
     headers:config.headers,
@@ -131,15 +113,10 @@ fetch(`${config.baseUrl}/users/me`, {
         name: name.textContent,
         about: discription.textContent
     })
-}).finally(() =>{
-    button.textContent='сохранение...'
 }).then(response =>{
-    button.textContent='Создать'
     checkResponse(response)
 }).then(data =>{
     return data
-}).catch((err)=>{
-    console.log(err);
 })
 }
-export {getApiProfile,getCard,deliteApi,putLike,createApiCard,patchAvatar,patchProfile,deleteLike}
+export {getApiProfile,getCards,deliteApi,putLike,createApiCard,patchAvatar,patchProfile,deleteLike}
